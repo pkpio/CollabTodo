@@ -1,6 +1,14 @@
 package space.closure.collaborativetodo;
 
 
+import android.content.Context;
+import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
+import android.widget.TextView;
+
 import org.umundo.core.Discovery;
 import org.umundo.core.Discovery.DiscoveryType;
 import org.umundo.core.Message;
@@ -9,16 +17,10 @@ import org.umundo.core.Publisher;
 import org.umundo.core.Receiver;
 import org.umundo.core.Subscriber;
 
-import android.content.Context;
-import android.net.wifi.WifiManager;
-        ;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.TextView;
+public class MainActivity extends BaseNavigationActivity {
+    DrawerLayout mDrawerLayout;
+    ActionBarDrawerToggle mDrawerToggle;
 
-
-public class MainActivity extends AppCompatActivity {
     TextView tv;
     Thread testPublishing;
     Discovery disc;
@@ -31,9 +33,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tv = new TextView(this);
+        tv = (TextView) findViewById(R.id.log);
         tv.setText("");
-        setContentView(tv);
 
         WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         if (wifi != null) {
