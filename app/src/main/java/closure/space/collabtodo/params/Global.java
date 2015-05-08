@@ -1,6 +1,9 @@
-package params;
+package closure.space.collabtodo.params;
 
 /**
+ * <p>
+ * These are constants across all devices and the umundo transfer protocol
+ * <p/>
  * Created by praveen on 8/5/15.
  */
 public class Global {
