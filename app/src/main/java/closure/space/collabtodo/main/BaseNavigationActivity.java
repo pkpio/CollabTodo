@@ -1,4 +1,4 @@
-package space.closure.collaborativetodo;
+package closure.space.collabtodo.main;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+
+import space.closure.collaborativetodo.R;
 
 /**
  * Created by praveen on 07.05.15.

@@ -1,7 +1,6 @@
-package space.closure.collaborativetodo;
+package closure.space.collabtodo.main;
 
 
-import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +15,8 @@ import org.umundo.core.Node;
 import org.umundo.core.Publisher;
 import org.umundo.core.Receiver;
 import org.umundo.core.Subscriber;
+
+import space.closure.collaborativetodo.R;
 
 public class MainActivity extends BaseNavigationActivity {
     DrawerLayout mDrawerLayout;
@@ -36,7 +37,7 @@ public class MainActivity extends BaseNavigationActivity {
         tv = (TextView) findViewById(R.id.log);
         tv.setText("");
 
-        WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifi = (WifiManager) getSystemService(WIFI_SERVICE);
         if (wifi != null) {
             WifiManager.MulticastLock mcLock = wifi.createMulticastLock("mylock");
             mcLock.acquire();
