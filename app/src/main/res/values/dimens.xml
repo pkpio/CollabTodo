@@ -3,7 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <!-- List item dimens -->
+    <!-- App level dimens -->
+    <dimen name="navigation_width">300dp</dimen>
 
     <!-- Entry List item dimens -->
     <dimen name="listitem_entry_horizontal_padding">8dp</dimen>
