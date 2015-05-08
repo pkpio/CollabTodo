@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/listitem_todolist_horizontal_padding"
+    android:paddingRight="@dimen/listitem_todolist_horizontal_padding"
+    android:paddingTop="@dimen/listitem_todolist_vertical_padding">
+
+    <!-- Entry main text -->
+    <TextView
+        android:id="@+id/todolist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="@string/todolist_sample_name"
+        android:textColor="@color/md_grey_900"
+        android:textSize="@dimen/listitem_todolist_main_textsize" />
+
+
+    <!-- Entries count circle -->
+    <TextView
+        android:id="@+id/todolist_entrycount"
+        android:layout_width="@dimen/listitem_todolist_count_circleradius"
+        android:layout_height="@dimen/listitem_todolist_count_circleradius"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/circle_orange"
+        android:gravity="center"
+        android:text="@string/todolist_sample_count"
+        android:textColor="@color/md_white_1000"
+        android:textSize="@dimen/listitem_todolist_count_textsize" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/todolist_name"
+        android:layout_marginTop="@dimen/listitem_todolist_vertical_padding"
+        android:background="@color/md_grey_300"></View>
+
+
+</RelativeLayout>

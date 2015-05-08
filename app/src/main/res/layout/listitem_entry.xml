@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/listitem_entry_horizontal_padding"
+    android:paddingRight="@dimen/listitem_entry_horizontal_padding"
+    android:paddingTop="@dimen/listitem_entry_vertical_padding">
+
+    <!-- Priority circle -->
+    <TextView
+        android:id="@+id/entry_prio"
+        android:layout_width="@dimen/listitem_entry_prio_circleradius"
+        android:layout_height="@dimen/listitem_entry_prio_circleradius"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/circle_red"
+        android:gravity="center"
+        android:text="@string/entry_sample_prio"
+        android:textColor="@color/md_white_1000"
+        android:textSize="@dimen/listitem_entry_prio_textsize"
+        android:textStyle="bold" />
+
+    <!-- Entry main text -->
+    <TextView
+        android:id="@+id/entry_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/entry_prio"
+        android:paddingLeft="8dp"
+        android:text="@string/entry_sample_name"
+        android:textColor="@color/md_grey_900"
+        android:textSize="@dimen/listitem_entry_main_textsize" />
+
+    <!-- Entry strike out line -->
+    <View
+        android:id="@+id/entry_strike"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/listitem_entry_strike_thickness"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@id/entry_prio"
+        android:background="@color/md_grey_700"
+        android:visibility="gone"></View>
+
+    <!-- Listview items seperator -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/entry_prio"
+        android:layout_marginTop="@dimen/listitem_entry_vertical_padding"
+        android:background="@color/md_grey_300"></View>
+
+
+</RelativeLayout>

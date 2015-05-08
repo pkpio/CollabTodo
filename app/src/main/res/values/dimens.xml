@@ -2,4 +2,22 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- List item dimens -->
+
+    <!-- Entry List item dimens -->
+    <dimen name="listitem_entry_horizontal_padding">8dp</dimen>
+    <dimen name="listitem_entry_vertical_padding">8dp</dimen>
+    <dimen name="listitem_entry_main_textsize">24sp</dimen>
+    <dimen name="listitem_entry_prio_circleradius">45dp</dimen>
+    <dimen name="listitem_entry_prio_textsize">28sp</dimen>
+    <dimen name="listitem_entry_strike_thickness">1dp</dimen>
+
+    <!-- TodoList List item dimens -->
+    <dimen name="listitem_todolist_horizontal_padding">16dp</dimen>
+    <dimen name="listitem_todolist_vertical_padding">16dp</dimen>
+    <dimen name="listitem_todolist_main_textsize">24sp</dimen>
+    <dimen name="listitem_todolist_count_circleradius">28dp</dimen>
+    <dimen name="listitem_todolist_count_textsize">18sp</dimen>
+
 </resources>
