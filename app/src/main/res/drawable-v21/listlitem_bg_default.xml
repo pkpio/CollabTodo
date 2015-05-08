@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?android:attr/colorControlHighlight">
+    <item>
+        <selector>
+            <item
+                android:drawable="@color/md_grey_400"
+                android:state_pressed="true"></item>
+            <item android:drawable="@color/background_material_light" />
+        </selector>
+    </item>
+</ripple>

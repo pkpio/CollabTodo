@@ -22,7 +22,7 @@ public class EntryTest {
     public static Entry getDataPoint() {
         Entry e = new Entry();
         e.setEntryid(String.valueOf(NumberFactory.random()));
-        e.setEntryName("Test Entry #" + NumberFactory.random());
+        e.setEntryName("Test Entry #" + NumberFactory.random(1, 999));
 
         // Get random EntryPriorities and set eventids for them
         List<EntryPriority> eps = EntryPriorityTest.getDataPoints(NumberFactory.random(1, 3));

@@ -20,10 +20,10 @@ public class TodoListTest {
      *
      * @return sample TodoList data point
      */
-    public TodoList getDataPoint() {
+    public static TodoList getDataPoint() {
         TodoList tl = new TodoList();
         tl.setListid(String.valueOf(NumberFactory.random()));
-        tl.setListname("Test List #" + NumberFactory.random());
+        tl.setListname("Test List #" + NumberFactory.random(1, 999));
         tl.setEntries(EntryTest.getDataPoints(NumberFactory.random(1, 10)));
         return tl;
     }
@@ -34,7 +34,7 @@ public class TodoListTest {
      * @param size Size of list
      * @return sample List of TodoList data points
      */
-    public List<TodoList> getDataPoints(int size) {
+    public static List<TodoList> getDataPoints(int size) {
         List<TodoList> tls = new ArrayList<TodoList>();
 
         for (int i = 0; i < size; i++)

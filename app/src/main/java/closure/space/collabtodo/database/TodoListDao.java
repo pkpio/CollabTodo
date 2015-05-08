@@ -1,5 +1,9 @@
 package closure.space.collabtodo.database;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import closure.space.collabtodo.models.Entry;
 import closure.space.collabtodo.models.TodoList;
 
 /**
@@ -38,6 +42,15 @@ public class TodoListDao {
      */
     public void delete(String listid) {
 
+    }
+
+    /**
+     * Get a list of all TodoLists in the local database
+     *
+     * @return List of TodoList
+     */
+    public List<TodoList> list() {
+        return null;
     }
 
 }
