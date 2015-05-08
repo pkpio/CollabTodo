@@ -69,8 +69,11 @@ public class MainActivity extends BaseNavigationActivity {
         @Override
         public void run() {
             String message = "This is foo from android";
+            Message msg = new Message();
+            msg.setData(message.getBytes());
+            msg.putMeta("Zolo", "Test meta contents");
             while (testPublishing != null) {
-                fooPub.send(message.getBytes());
+                fooPub.send(msg);
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
