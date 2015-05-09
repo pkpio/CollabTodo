@@ -57,6 +57,12 @@ public class EntriesFragment extends Fragment {
     }
 
 
+    public void updateEntryList(List<Entry> entries) {
+        this.mEntries = entries;
+        mEntryListAdapter.notifyDataSetChanged();
+    }
+
+
     /**
      * Custom list adapter for Entry listing
      *

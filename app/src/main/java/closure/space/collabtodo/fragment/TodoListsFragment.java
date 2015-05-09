@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import junit.framework.TestSuite;
 import java.util.List;
 
 import closure.space.collabtodo.database.TodoListDao;
+import closure.space.collabtodo.main.Interfaces;
 import closure.space.collabtodo.models.TodoList;
 import closure.space.collabtodo.testsuite.TodoListTest;
 import space.closure.collaborativetodo.R;
@@ -26,9 +28,11 @@ import space.closure.collaborativetodo.R;
  * <p/>
  * Created by praveen on 8/5/15.
  */
-public class TodoListsFragment extends Fragment {
+public class TodoListsFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     Context context;
+    Interfaces.EntryUpdater mEntryUpdater;
+
     List<TodoList> mTodoLists;
     TodoListsListAdapter mTodoListsAdapter;
 
@@ -36,6 +40,7 @@ public class TodoListsFragment extends Fragment {
     public void onAttach(Activity a) {
         super.onAttach(a);
         this.context = getActivity();
+        this.mEntryUpdater = (Interfaces.EntryUpdater) a;
     }
 
     @Override
@@ -47,12 +52,43 @@ public class TodoListsFragment extends Fragment {
         // List all TodoLists
         mTodoLists = TodoListTest.getDataPoints(10);
 
+        // Update entries from the first TodoList
+        mEntryUpdater.updateEntryList(
+                mTodoLists.get(0).getEntries(),
+                mTodoLists.get(0).getListname());
+
         // Initialize list and adapter
         ListView mTodoListView = (ListView) rootView.findViewById(R.id.todolists_list);
         mTodoListsAdapter = new TodoListsListAdapter(context);
         mTodoListView.setAdapter(mTodoListsAdapter);
+        mTodoListView.setOnItemClickListener(this);
 
         return rootView;
+    }
+
+    /**
+     * Update the currently shown TodoList
+     */
+    public void updateTodoList() {
+        // List all TodoLists
+        mTodoLists = TodoListTest.getDataPoints(10);
+        mTodoListsAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Get the list of TodoList currently shown on UI
+     *
+     * @return List of TodoList currently on UI
+     */
+    public List<TodoList> getTodoList() {
+        return mTodoLists;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        mEntryUpdater.updateEntryList(
+                mTodoLists.get(position).getEntries(),
+                mTodoLists.get(position).getListname());
     }
 
     /**

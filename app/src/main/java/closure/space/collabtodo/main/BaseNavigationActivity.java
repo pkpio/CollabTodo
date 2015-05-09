@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -13,9 +14,10 @@ import space.closure.collaborativetodo.R;
 /**
  * Created by praveen on 07.05.15.
  */
-public class BaseNavigationActivity extends AppCompatActivity {
+public class BaseNavigationActivity extends AppCompatActivity implements Interfaces.DrawerStateUpdater {
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
+    String title;
 
     public void setUpDrawer() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -27,12 +29,12 @@ public class BaseNavigationActivity extends AppCompatActivity {
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
-                getSupportActionBar().setTitle("Close");
+                getSupportActionBar().setTitle(title);
             }
 
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
-                getSupportActionBar().setTitle("Open");
+                getSupportActionBar().setTitle(title);
             }
         };
 
@@ -51,6 +53,9 @@ public class BaseNavigationActivity extends AppCompatActivity {
 
         // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
+
+        // Set title again. Because the title set from first list is override sometime
+        getSupportActionBar().setTitle(title);
     }
 
     @Override
@@ -70,4 +75,16 @@ public class BaseNavigationActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void setDrawerState(Boolean state, String title) {
+        this.title = title;
+
+        if (mDrawerLayout == null)
+            return;
+
+        if (state)
+            mDrawerLayout.openDrawer(Gravity.LEFT);
+        else
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+    }
 }
