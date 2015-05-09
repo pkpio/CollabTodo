@@ -59,6 +59,7 @@ public class EntriesFragment extends Fragment {
 
     public void updateEntryList(List<Entry> entries) {
         this.mEntries = entries;
+        // -TODO- mEntryListAdapter can be NULL at this point
         mEntryListAdapter.notifyDataSetChanged();
     }
 
