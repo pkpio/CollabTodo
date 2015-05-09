@@ -21,7 +21,7 @@ public class TodoListDao {
      *
      * @param list
      */
-    public void save(TodoList list) {
+    public static void save(TodoList list) {
 
     }
 
@@ -31,7 +31,7 @@ public class TodoListDao {
      *
      * @param list
      */
-    public void delete(TodoList list) {
+    public static void delete(TodoList list) {
         delete(list.getListid());
     }
 
@@ -40,7 +40,7 @@ public class TodoListDao {
      *
      * @param listid
      */
-    public void delete(String listid) {
+    public static void delete(String listid) {
 
     }
 
@@ -49,7 +49,7 @@ public class TodoListDao {
      *
      * @return List of TodoList
      */
-    public List<TodoList> list() {
+    public static List<TodoList> list() {
         return null;
     }
 
