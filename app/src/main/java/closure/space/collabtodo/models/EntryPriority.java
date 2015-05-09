@@ -1,11 +1,13 @@
 package closure.space.collabtodo.models;
 
 import com.google.gson.annotations.SerializedName;
+import com.orm.SugarRecord;
 
 /**
  * Created by praveen on 8/5/15.
  */
-public class EntryPriority {
+public class EntryPriority extends SugarRecord<EntryPriority> {
+
     @SerializedName("userid")
     String userid;
 

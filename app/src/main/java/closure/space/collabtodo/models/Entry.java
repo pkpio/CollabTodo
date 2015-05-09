@@ -10,15 +10,19 @@ import java.util.List;
  * Created by praveen on 8/5/15.
  */
 public class Entry extends SugarRecord<Entry> {
+
     @SerializedName("entryid")
     String entryid;
 
     @SerializedName("entryname")
     String entryName;
 
+    @SerializedName("todolistid")
+    String listid;
+
     /**
      * Sugar doesn't support saving of Lists into database. So, we add it to ignore
-     * list and handle them in EntryDao save methods accordingly.
+     * list and handle them in EntryDao save methods appropriately.
      */
     @SerializedName("priorities")
     @Ignore
@@ -27,7 +31,7 @@ public class Entry extends SugarRecord<Entry> {
     /**
      * Get global unique of the entry
      *
-     * @return
+     * @return entryid
      */
     public String getEntryid() {
         return entryid;
@@ -76,5 +80,24 @@ public class Entry extends SugarRecord<Entry> {
      */
     public void setPriorities(List<EntryPriority> priorities) {
         this.priorities = priorities;
+    }
+
+
+    /**
+     * Get the listid of the TodoList to which this event belongs to
+     *
+     * @return TodoList id
+     */
+    public String getListid() {
+        return listid;
+    }
+
+    /**
+     * Set the listid of the TodoList to which this event belongs to
+     *
+     * @param listid TodoList id
+     */
+    public void setListid(String listid) {
+        this.listid = listid;
     }
 }

@@ -9,9 +9,9 @@
     <!-- Entry List item dimens -->
     <dimen name="listitem_entry_horizontal_padding">16dp</dimen>
     <dimen name="listitem_entry_vertical_padding">8dp</dimen>
-    <dimen name="listitem_entry_main_textsize">24sp</dimen>
+    <dimen name="listitem_entry_main_textsize">18sp</dimen>
     <dimen name="listitem_entry_prio_circleradius">45dp</dimen>
-    <dimen name="listitem_entry_prio_textsize">24sp</dimen>
+    <dimen name="listitem_entry_prio_textsize">18sp</dimen>
     <dimen name="listitem_entry_strike_thickness">1dp</dimen>
 
     <!-- TodoList List item dimens -->

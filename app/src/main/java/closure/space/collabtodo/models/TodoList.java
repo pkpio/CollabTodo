@@ -1,13 +1,24 @@
 package closure.space.collabtodo.models;
 
+import com.google.gson.annotations.SerializedName;
+import com.orm.SugarRecord;
+
 import java.util.List;
+
+import closure.space.collabtodo.helper.JsonFactory;
 
 /**
  * Created by praveen on 8/5/15.
  */
-public class TodoList {
+public class TodoList extends SugarRecord<TodoList> {
+
+    @SerializedName("listid")
     String listid;
+
+    @SerializedName("listname")
     String listname;
+
+    @SerializedName("entries")
     List<Entry> entries;
 
     /**
@@ -34,6 +45,8 @@ public class TodoList {
      * @return
      */
     public String getListname() {
+
+        JsonFactory.toObject("", Entry.class);
         return listname;
     }
 
