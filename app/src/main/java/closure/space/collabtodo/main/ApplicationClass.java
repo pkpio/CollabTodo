@@ -14,7 +14,10 @@ import org.umundo.core.Publisher;
 import org.umundo.core.Receiver;
 import org.umundo.core.Subscriber;
 
+import closure.space.collabtodo.helper.JsonFactory;
+import closure.space.collabtodo.models.Entry;
 import closure.space.collabtodo.params.Local;
+import closure.space.collabtodo.testsuite.EntryTest;
 
 /**
  * Created by praveen on 9/5/15.
@@ -26,6 +29,8 @@ public class ApplicationClass extends SugarApp {
     Node mNode;
     Publisher mPublisher;
     Subscriber mSubscriber;
+
+    Thread testPublishing;
 
 
     public ApplicationClass() {
@@ -69,6 +74,10 @@ public class ApplicationClass extends SugarApp {
         // Add pubs and subs on node
         mNode.addPublisher(mPublisher);
         mNode.addSubscriber(mSubscriber);
+
+        // Testing
+        testPublishing = new Thread(new TestPublishing());
+        testPublishing.start();
     }
 
     /**
@@ -77,10 +86,11 @@ public class ApplicationClass extends SugarApp {
     public class CustomUmunodReceiver extends Receiver {
         public void receive(Message msg) {
 
-            for (String key : msg.getMeta().keySet()) {
-                Log.i(Local.UMUNDO_LOG_TAG, key + ": " + msg.getMeta(key));
-            }
-            Log.i(Local.UMUNDO_LOG_TAG, new String(msg.getData()));
+            //for (String key : msg.getMeta().keySet()) {
+            //    Log.i(Local.UMUNDO_LOG_TAG, key + ": " + msg.getMeta(key));
+            //}
+            Entry entry = JsonFactory.toObject(new String(msg.getData()), Entry.class);
+            Log.i(Local.UMUNDO_LOG_TAG, entry.getEntryName());
 
             // -TODO- Implement a way to pass callbacks on new data to higher layers
         }
@@ -88,4 +98,23 @@ public class ApplicationClass extends SugarApp {
 
     // -TODO- Implement multicast lock release
     // mcLock.release();
+
+    public class TestPublishing implements Runnable {
+
+        @Override
+        public void run() {
+
+            while (testPublishing != null) {
+                // Generate a random entry
+                Entry entry = EntryTest.getDataPoint();
+
+                mPublisher.send(JsonFactory.toJson(entry).getBytes());
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
