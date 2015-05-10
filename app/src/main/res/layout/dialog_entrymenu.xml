@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- Mark complete checkbox -->
     <com.rey.material.widget.CheckBox
         android:id="@+id/entry_action_done"
         style="@style/CheckBoxDrawable"
@@ -19,12 +20,30 @@
         android:text="@string/entry_action_done"
         android:textSize="14sp" />
 
+    <!-- Move to list -->
+    <com.rey.material.widget.TextView
+        android:id="@+id/entry_action_move"
+        style="@style/FlatButtonRippleStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/entry_action_done"
+        android:drawableLeft="@drawable/ic_view_list_black_24dp"
+        android:drawablePadding="10dp"
+        android:gravity="left|center_vertical"
+        android:paddingBottom="16dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:text="@string/entry_action_move"
+        android:textColor="@color/md_black_1000" />
+
+    <!-- Delete item -->
     <com.rey.material.widget.TextView
         android:id="@+id/entry_action_delete"
         style="@style/FlatButtonRippleStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/entry_action_done"
+        android:layout_below="@id/entry_action_move"
         android:drawableLeft="@drawable/ic_delete_black_24dp"
         android:drawablePadding="10dp"
         android:gravity="left|center_vertical"
@@ -35,7 +54,9 @@
         android:text="@string/entry_action_delete"
         android:textColor="@color/md_black_1000" />
 
+    <!-- Priority title -->
     <com.rey.material.widget.TextView
+        android:id="@+id/entry_prio_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/entry_action_delete"
@@ -45,18 +66,50 @@
         android:textSize="14sp"
         android:textStyle="bold" />
 
-    <com.rey.material.widget.Slider
-        android:id="@+id/entry_action_priority"
-        style="@style/Material.Widget.Slider.Discrete"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/entry_action_delete"
-        android:gravity="center"
-        android:padding="5dp"
-        app:sl_maxValue="5"
-        app:sl_minValue="1"
-        app:sl_stepValue="1"
-        app:sl_value="3" />
+        android:layout_below="@id/entry_prio_title"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:id="@+id/entry_action_prio_decr"
+            android:layout_width="@dimen/menuitem_entry_prio_circleradius"
+            android:layout_height="@dimen/menuitem_entry_prio_circleradius"
+            android:layout_gravity="left"
+            android:background="@drawable/circle_clickable"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="@string/entry_action_prio_decr"
+            android:textColor="@color/md_white_1000" />
+
+        <TextView
+            android:id="@+id/entry_action_prio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/entry_sample_prio"
+            android:textColor="@color/md_black_1000"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/entry_action_prio_incr"
+            android:layout_width="@dimen/menuitem_entry_prio_circleradius"
+            android:layout_height="@dimen/menuitem_entry_prio_circleradius"
+            android:layout_gravity="right"
+            android:background="@drawable/circle_clickable"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="@string/entry_action_prio_incr"
+            android:textColor="@color/md_white_1000" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

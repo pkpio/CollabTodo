@@ -19,28 +19,44 @@
         android:textColor="@color/md_white_1000"
         android:textSize="@dimen/listitem_entry_prio_textsize" />
 
-    <!-- Entry main text -->
-    <TextView
-        android:id="@+id/entry_name"
+    <!-- View to wrap strike out and main text -->
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/entry_prio"
-        android:paddingLeft="8dp"
-        android:text="@string/entry_sample_name"
-        android:textColor="@color/md_grey_900"
-        android:textSize="@dimen/listitem_entry_main_textsize" />
+        android:layout_toRightOf="@id/entry_prio">
 
-    <!-- Entry strike out line -->
-    <View
-        android:id="@+id/entry_strike"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/listitem_entry_strike_thickness"
+        <!-- Entry main text -->
+        <TextView
+            android:id="@+id/entry_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/entry_sample_name"
+            android:textColor="@color/md_grey_900"
+            android:textSize="@dimen/listitem_entry_main_textsize" />
+
+        <!-- Entry strike out line -->
+        <TextView
+            android:id="@+id/entry_strike"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/listitem_entry_strike_thickness"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:background="@color/md_grey_700"
+            android:visibility="gone"></TextView>
+
+    </FrameLayout>
+
+    <!-- Menu item -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_margin="5dp"
-        android:layout_toRightOf="@id/entry_prio"
-        android:background="@color/md_grey_700"
-        android:visibility="gone"></View>
+        android:padding="8dp"
+        android:src="@drawable/more_vert_states" />
 
     <!-- Listview items seperator -->
     <View
