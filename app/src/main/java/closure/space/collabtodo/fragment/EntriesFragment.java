@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import closure.space.collabtodo.database.TodoListDao;
+import closure.space.collabtodo.dialog.EntryMenuDialog;
 import closure.space.collabtodo.models.Entry;
 import closure.space.collabtodo.models.EntryPriority;
 import closure.space.collabtodo.models.TodoList;
@@ -27,7 +29,7 @@ import space.closure.collaborativetodo.R;
  * <p/>
  * Created by praveen on 8/5/15.
  */
-public class EntriesFragment extends Fragment {
+public class EntriesFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     Context context;
     List<Entry> mEntries;
@@ -52,6 +54,7 @@ public class EntriesFragment extends Fragment {
         ListView mEntryListView = (ListView) rootView.findViewById(R.id.entries_list);
         mEntryListAdapter = new EntryListAdapter(context);
         mEntryListView.setAdapter(mEntryListAdapter);
+        mEntryListView.setOnItemClickListener(this);
 
         return rootView;
     }
@@ -61,6 +64,14 @@ public class EntriesFragment extends Fragment {
         this.mEntries = entries;
         // -TODO- mEntryListAdapter can be NULL at this point
         mEntryListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        int[] dialogLocation = new int[2];
+        view.getLocationOnScreen(dialogLocation);
+        EntryMenuDialog emd = new EntryMenuDialog(context, mEntries.get(position), dialogLocation);
+        emd.show();
     }
 
 

@@ -17,6 +17,10 @@
     <!-- Entries fragment strings -->
     <string name="entry_sample_name">Deploy more servers</string>
     <string name="entry_sample_prio">4</string>
+    <string name="entry_action_done">Mark complete</string>
+    <string name="entry_action_undone">Mark incomplete</string>
+    <string name="entry_action_delete">Delete</string>
+    <string name="entry_action_prio">Priority</string>
 
 
 </resources>

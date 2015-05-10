@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="200dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.rey.material.widget.CheckBox
+        android:id="@+id/entry_action_done"
+        style="@style/CheckBoxDrawable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:gravity="center_vertical"
+        android:paddingBottom="16dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:text="@string/entry_action_done"
+        android:textSize="14sp" />
+
+    <com.rey.material.widget.TextView
+        android:id="@+id/entry_action_delete"
+        style="@style/FlatButtonRippleStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/entry_action_done"
+        android:drawableLeft="@drawable/ic_delete_black_24dp"
+        android:drawablePadding="10dp"
+        android:gravity="left|center_vertical"
+        android:paddingBottom="16dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:text="@string/entry_action_delete"
+        android:textColor="@color/md_black_1000" />
+
+    <com.rey.material.widget.TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/entry_action_delete"
+        android:paddingLeft="10dp"
+        android:text="@string/entry_action_prio"
+        android:textColor="@color/md_black_1000"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <com.rey.material.widget.Slider
+        android:id="@+id/entry_action_priority"
+        style="@style/Material.Widget.Slider.Discrete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/entry_action_delete"
+        android:gravity="center"
+        android:padding="5dp"
+        app:sl_maxValue="5"
+        app:sl_minValue="1"
+        app:sl_stepValue="1"
+        app:sl_value="3" />
+
+
+</RelativeLayout>
