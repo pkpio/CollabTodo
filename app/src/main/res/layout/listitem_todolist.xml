@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:background="@drawable/listitem_bg_default"
     android:paddingLeft="@dimen/listitem_todolist_horizontal_padding"
-    android:paddingRight="@dimen/listitem_todolist_horizontal_padding"
     android:paddingTop="@dimen/listitem_todolist_vertical_padding">
 
     <!-- Entry main text -->
@@ -17,6 +16,13 @@
         android:textColor="@color/md_grey_900"
         android:textSize="@dimen/listitem_todolist_main_textsize" />
 
+    <!-- Just an additional line next to count circle -->
+    <View
+        android:layout_width="14dp"
+        android:layout_height="@dimen/listitem_todolist_count_circleradius"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@color/md_orange_400"></View>
 
     <!-- Entries count circle -->
     <TextView
@@ -25,6 +31,7 @@
         android:layout_height="@dimen/listitem_todolist_count_circleradius"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:layout_marginRight="4dp"
         android:background="@drawable/circle_orange"
         android:gravity="center"
         android:text="@string/todolist_sample_count"
@@ -35,6 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/todolist_name"
+        android:layout_marginRight="@dimen/listitem_todolist_horizontal_padding"
         android:layout_marginTop="@dimen/listitem_todolist_vertical_padding"
         android:background="@color/md_grey_300"></View>
 

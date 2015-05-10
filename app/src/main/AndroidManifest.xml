@@ -17,6 +17,7 @@
 
         <activity
             android:name="closure.space.collabtodo.main.MainActivity"
+            android:configChanges="screenLayout|screenSize|orientation"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

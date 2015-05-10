@@ -12,6 +12,7 @@
     <!-- TodoList fragment strings -->
     <string name="todolist_sample_name">Project X</string>
     <string name="todolist_sample_count">10</string>
+    <string name="todolist_add">Add List</string>
 
     <!-- Entries fragment strings -->
     <string name="entry_sample_name">Deploy more servers</string>

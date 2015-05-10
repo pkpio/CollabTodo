@@ -14,4 +14,23 @@
         <item name="background">@color/md_yellow_700</item>
     </style>
 
+    <!-- Button styles -->
+    <style name="ListAddButton" parent="Material.Drawable.Ripple.Wave.Light">
+        <item name="rd_rippleColor">#33000000</item>
+        <item name="fab_backgroundColor">#FF2196F3</item>
+        <item name="fab_elevation">4dp</item>
+        <item name="fab_iconSize">35dp</item>
+        <item name="fab_iconSrc">@drawable/ic_list_add_white</item>
+        <item name="rd_delayClick">true</item>
+    </style>
+
+    <style name="AddButton" parent="Material.Drawable.Ripple.Wave.Light">
+        <item name="rd_rippleColor">#33000000</item>
+        <item name="fab_backgroundColor">@color/md_yellow_600</item>
+        <item name="fab_elevation">4dp</item>
+        <item name="fab_iconSize">35dp</item>
+        <item name="fab_iconSrc">@drawable/ic_add_white</item>
+        <item name="rd_delayClick">true</item>
+    </style>
+
 </resources>
