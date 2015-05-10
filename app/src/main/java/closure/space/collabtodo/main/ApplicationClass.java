@@ -15,7 +15,10 @@ import org.umundo.core.Receiver;
 import org.umundo.core.Subscriber;
 
 import closure.space.collabtodo.helper.JsonFactory;
+import closure.space.collabtodo.helper.Procedures;
 import closure.space.collabtodo.models.Entry;
+import closure.space.collabtodo.models.TodoList;
+import closure.space.collabtodo.params.Global;
 import closure.space.collabtodo.params.Local;
 import closure.space.collabtodo.testsuite.EntryTest;
 
@@ -45,7 +48,12 @@ public class ApplicationClass extends SugarApp {
         initUmundo();
     }
 
-    private void initUmundo() {
+    /**
+     * Initialize umundo backend.
+     * Usually this is done when application starts and there is no reason to do it again
+     * unless you know what you are doing.
+     */
+    public void initUmundo() {
 
         // Get a lock on WifiMulticast
         WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
@@ -56,10 +64,8 @@ public class ApplicationClass extends SugarApp {
             Log.v(Local.UMUNDO_LOG_TAG, "Cannot get WifiManager");
         }
 
-
         // System.loadLibrary("umundoNativeJava");
         System.loadLibrary("umundoNativeJava_d");
-
 
         // Setup node and it's discovery
         mDiscovery = new Discovery(Discovery.DiscoveryType.MDNS);
@@ -84,20 +90,53 @@ public class ApplicationClass extends SugarApp {
      * A custom umundo receiver to handle all Subscribed traffic
      */
     public class CustomUmunodReceiver extends Receiver {
+
+        /**
+         * Called by umundo core when ever a new message arrives for a subscriber
+         *
+         * @param msg Umundo Message received
+         */
         public void receive(Message msg) {
 
-            //for (String key : msg.getMeta().keySet()) {
-            //    Log.i(Local.UMUNDO_LOG_TAG, key + ": " + msg.getMeta(key));
-            //}
-            Entry entry = JsonFactory.toObject(new String(msg.getData()), Entry.class);
-            Log.i(Local.UMUNDO_LOG_TAG, entry.getEntryName());
+            // Log messages received, if enabled
+            if (Local.UMESSAGE_LOGGING) {
+                for (String key : msg.getMeta().keySet())
+                    Log.i(Local.UMUNDO_LOG_TAG, key + ": " + msg.getMeta(key));
+                Log.i(Local.UMUNDO_LOG_TAG, "payload: " + new String(msg.getData()));
+            }
 
-            // -TODO- Implement a way to pass callbacks on new data to higher layers
+            // Check the method to be executed
+            int method = Integer.valueOf(msg.getMeta(Global.UMESSAGE_KEY_METHOD));
+
+            switch (method) {
+                case Global.METHOD_CREATE_LIST:
+                    Procedures.Remote.createList(JsonFactory.toObject(
+                            new String(msg.getData()),
+                            TodoList.class));
+                    break;
+                case Global.METHOD_DELETE_LIST:
+                    Procedures.Remote.deleteList(msg.getMeta(Global.UMESSAGE_KEY_ID));
+                    break;
+                case Global.METHOD_UPDATE_ENTRY:
+                    Procedures.Remote.updateEntry(JsonFactory.toObject(
+                            new String(msg.getData()),
+                            Entry.class));
+                    break;
+                case Global.METHOD_DELETE_ENTRY:
+                    Procedures.Remote.deleteEntry(msg.getMeta(Global.UMESSAGE_KEY_ID));
+                    break;
+
+            }
         }
     }
 
-    // -TODO- Implement multicast lock release
-    // mcLock.release();
+    /**
+     * Releases WifiMulticastLock help for umundo.
+     * Perform this only when user leaves the application.
+     */
+    public void releaseMulticastLock() {
+        mMulticastLock.release();
+    }
 
     public class TestPublishing implements Runnable {
 
@@ -117,4 +156,6 @@ public class ApplicationClass extends SugarApp {
             }
         }
     }
+
+
 }

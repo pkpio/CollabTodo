@@ -18,7 +18,8 @@ public class TodoList extends SugarRecord<TodoList> {
     @SerializedName("listname")
     String listname;
 
-    @SerializedName("entries")
+    // We never need to serialize and send the list of entries in a list
+    // @SerializedName("entries")
     List<Entry> entries;
 
     /**
