@@ -3,6 +3,7 @@ package closure.space.collabtodo.database;
 import java.util.List;
 
 import closure.space.collabtodo.models.Entry;
+import closure.space.collabtodo.models.EntryPriority;
 import closure.space.collabtodo.models.TodoList;
 
 /**
@@ -20,9 +21,16 @@ public class EntryDao {
      *
      * @param entry
      */
-    public void save(Entry entry) {
+    public static void save(Entry entry) {
         entry.save();
-        // -TODO- Handle saving of each EntryPriority of this event
+
+        if (entry.getPriorities() == null || entry.getPriorities().size() == 0)
+            return;
+        for (EntryPriority ep : entry.getPriorities()) {
+            ep.setEntryid(entry.getEntryid());
+            ep.save();
+        }
+
     }
 
 
@@ -31,7 +39,7 @@ public class EntryDao {
      *
      * @param entry
      */
-    public void delete(Entry entry) {
+    public static void delete(Entry entry) {
         delete(entry.getEntryid());
     }
 
@@ -40,8 +48,9 @@ public class EntryDao {
      *
      * @param entryid
      */
-    public void delete(String entryid) {
-        // -TODO- Implement this
+    public static void delete(String entryid) {
+        Entry.deleteAll(Entry.class, "entryid = ?", entryid);
+        EntryPriority.deleteAll(EntryPriority.class, "entryid = ?", entryid);
     }
 
     /**
@@ -50,7 +59,7 @@ public class EntryDao {
      * @param entryid Entryid of the Entry in local database
      * @return Entry with given id
      */
-    public Entry getEntry(String entryid) {
+    public static Entry getEntry(String entryid) {
         List<Entry> entries = Entry.find(Entry.class, "entryid = ?", entryid);
         if (entries == null || entries.size() == 0)
             return null;
@@ -64,7 +73,7 @@ public class EntryDao {
      * @param listid TodoListId of the list
      * @return List of Entries
      */
-    public List<Entry> getEntries(String listid) {
+    public static List<Entry> getEntries(String listid) {
         return setEntryPriorities(Entry.find(Entry.class, "listid = ?", listid));
     }
 
@@ -73,8 +82,10 @@ public class EntryDao {
      * Since Sugar doesn't support saving or retrieving of Lists, we keep a pointer,
      * entryid, in each EntryPriority and save, retrieve them accordingly.
      */
-    private Entry setEntryPriorities(Entry entry) {
-        // -TODO- Retrieve them from EntryPriorityDao and set
+    private static Entry setEntryPriorities(Entry entry) {
+        List<EntryPriority> eps = EntryPriority.find(EntryPriority.class,
+                "entryid = ?", entry.getEntryid());
+        entry.setPriorities(eps);
         return entry;
     }
 
@@ -83,7 +94,7 @@ public class EntryDao {
      * Since Sugar doesn't support saving or retrieving of Lists, we keep a pointer,
      * entryid, in each EntryPriority and save, retrieve them accordingly.
      */
-    private List<Entry> setEntryPriorities(List<Entry> entries) {
+    private static List<Entry> setEntryPriorities(List<Entry> entries) {
         for (Entry entry : entries)
             entry = setEntryPriorities(entry);
         return entries;
