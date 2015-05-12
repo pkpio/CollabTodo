@@ -58,7 +58,8 @@ public class Procedures {
          * @return Created / Updated Entry
          */
         public static Entry updateEntry(Entry entry) {
-            // -TODO- Implement
+            // -TODO- Implement completely
+            entry.save();
             return entry;
         }
 

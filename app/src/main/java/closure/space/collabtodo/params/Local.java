@@ -27,4 +27,24 @@ public class Local {
      * Enable this to log all the meta and payload in each received umundo message
      */
     public static final Boolean UMESSAGE_LOGGING = true;
+
+    /**
+     * Entry priority Max value
+     */
+    public static final int ENTRY_PRIORITY_MAX = 5;
+
+    /**
+     * Entry priority Min value
+     */
+    public static final int ENTRY_PRIORITY_MIN = 1;
+
+    /**
+     * Entry priority Min value
+     */
+    public static final int ENTRY_PRIORITY_DEFAULT = 3;
+
+    /**
+     * Entry name Min characters
+     */
+    public static final int ENTRY_NAME_MIN_CHARS = 3;
 }

@@ -24,6 +24,11 @@
     <string name="entry_action_prio">Priority</string>
     <string name="entry_action_prio_incr">+</string>
     <string name="entry_action_prio_decr">-</string>
+    <string name="entry_new_name_label">Entry title</string>
+    <string name="entry_new_name_helper">Min. %d chars long</string>
+    <string name="entry_new_name_error">check!</string>
+    <string name="entry_new_name_sample">Buy books</string>
+    <string name="entry_new_save">save</string>
 
 
 </resources>

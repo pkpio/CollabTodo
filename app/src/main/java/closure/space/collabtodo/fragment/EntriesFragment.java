@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import closure.space.collabtodo.database.TodoListDao;
+import closure.space.collabtodo.dialog.EntryCreateDialog;
 import closure.space.collabtodo.dialog.EntryMenuDialog;
 import closure.space.collabtodo.models.Entry;
 import closure.space.collabtodo.models.EntryPriority;
@@ -29,9 +30,10 @@ import space.closure.collaborativetodo.R;
  * <p/>
  * Created by praveen on 8/5/15.
  */
-public class EntriesFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class EntriesFragment extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     Context context;
+    String mListid;
     List<Entry> mEntries;
     EntryListAdapter mEntryListAdapter;
 
@@ -56,6 +58,9 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
         mEntryListView.setAdapter(mEntryListAdapter);
         mEntryListView.setOnItemClickListener(this);
 
+        // Setup add button
+        rootView.findViewById(R.id.entry_add_btn).setOnClickListener(this);
+
         return rootView;
     }
 
@@ -72,6 +77,17 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
         view.getLocationOnScreen(dialogLocation);
         EntryMenuDialog emd = new EntryMenuDialog(context, mEntries.get(position), dialogLocation);
         emd.show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.entry_add_btn:
+                EntryCreateDialog ecd = new EntryCreateDialog(context, mListid);
+                ecd.show();
+                break;
+        }
+
     }
 
 

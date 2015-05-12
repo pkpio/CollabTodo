@@ -3,7 +3,6 @@ package closure.space.collabtodo.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
@@ -38,6 +37,6 @@ public class EntryMenuDialog extends Dialog {
         layoutParams.x = 0;             //x position
         layoutParams.y = location[1];   //y position
 
-        setContentView(R.layout.dialog_entrymenu);
+        setContentView(R.layout.dialog_entry_menu);
     }
 }

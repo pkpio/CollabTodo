@@ -15,7 +15,7 @@
     <dimen name="listitem_entry_strike_thickness">2dp</dimen>
 
     <!-- Entry menu item dimens -->
-    <dimen name="menuitem_entry_prio_circleradius">40dp</dimen>
+    <dimen name="menuitem_entry_prio_circleradius">30dp</dimen>
 
     <!-- TodoList List item dimens -->
     <dimen name="listitem_todolist_horizontal_padding">16dp</dimen>
