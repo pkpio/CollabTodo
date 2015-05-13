@@ -30,9 +30,9 @@ public class MainActivity extends BaseNavigationActivity implements Interfaces.E
         ft.commit();
     }
 
-    public void updateEntryList(List<Entry> entries, String todoListName) {
-        entriesFragment.updateEntryList(entries);
-        setDrawerState(false, todoListName);
+    public void updateEntryList(String listid, String listname) {
+        entriesFragment.updateEntryList(listid);
+        setDrawerState(false, listname);
     }
 
     public void updateTodoList() {

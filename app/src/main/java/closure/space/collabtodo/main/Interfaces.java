@@ -19,10 +19,10 @@ public class Interfaces {
         /**
          * Update the current list of entries shown on the UI
          *
-         * @param entries      List of entries
-         * @param todoListName Name of the TodoList
+         * @param listid   id of the list to use
+         * @param listname name of the list, for title bar
          */
-        public void updateEntryList(List<Entry> entries, String todoListName);
+        public void updateEntryList(String listid, String listname);
     }
 
     /**

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import closure.space.collabtodo.database.EntryDao;
 import closure.space.collabtodo.database.TodoListDao;
 import closure.space.collabtodo.dialog.EntryCreateDialog;
 import closure.space.collabtodo.dialog.EntryMenuDialog;
@@ -50,7 +51,7 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
                 false);
 
         // List all Entries in a TodoList
-        mEntries = EntryTest.getDataPoints(20);
+        updateEntryList(mListid);
 
         // Initialize list and adapter
         ListView mEntryListView = (ListView) rootView.findViewById(R.id.entries_list);
@@ -65,10 +66,21 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
     }
 
 
-    public void updateEntryList(List<Entry> entries) {
-        this.mEntries = entries;
-        // -TODO- mEntryListAdapter can be NULL at this point
-        mEntryListAdapter.notifyDataSetChanged();
+    public void updateEntryList(String listid) {
+        this.mListid = listid;
+
+        // Set entries to be listed
+        if (mListid == null)
+            // Sample data for now
+            mEntries = EntryTest.getDataPoints(20);
+        else
+            mEntries = EntryDao.getEntries(listid);
+
+        // Sort them by priority
+        // -TODO- Implement sorting based on entries average priority here
+
+        if (mEntryListAdapter != null)
+            mEntryListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -137,7 +149,7 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
             viewHolder.entryName.setText(getItem(position).getEntryName());
 
             // Set Avg. value and a proper background
-            int avg = avgPriority(getItem(position).getPriorities());
+            int avg = getItem(position).getMeanPriority();
             viewHolder.entryPrio.setText(String.valueOf(avg));
             switch (avg) {
                 case 5:
@@ -180,16 +192,5 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
     static class ViewHolder {
         TextView entryName;
         TextView entryPrio;
-    }
-
-    int avgPriority(List<EntryPriority> entryPriorities) {
-        if (entryPriorities == null || entryPriorities.size() == 0)
-            return 1;
-
-        int total = 0;
-        for (EntryPriority prio : entryPriorities)
-            total += prio.getPriority();
-
-        return total / entryPriorities.size();
     }
 }
