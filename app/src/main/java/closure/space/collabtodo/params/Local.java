@@ -47,4 +47,9 @@ public class Local {
      * Entry name Min characters
      */
     public static final int ENTRY_NAME_MIN_CHARS = 3;
+
+    /**
+     * List name Min characters
+     */
+    public static final int LIST_NAME_MIN_CHARS = 3;
 }

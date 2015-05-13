@@ -125,7 +125,7 @@ public class Entry extends SugarRecord<Entry> {
      * @param priority Priority value
      * @param userId   Userid of the user - this is currently the unique device id
      */
-    public void updatePriority(int priority, String userId) {
+    public void updatePriority(String userId, int priority) {
         if (priorities == null)
             priorities = new ArrayList<EntryPriority>();
 

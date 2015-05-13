@@ -2,6 +2,7 @@ package closure.space.collabtodo.models;
 
 import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class TodoList extends SugarRecord<TodoList> {
 
     // We never need to serialize and send the list of entries in a list
     // @SerializedName("entries")
+    @Ignore
     List<Entry> entries;
 
     public TodoList() {

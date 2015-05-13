@@ -2,6 +2,7 @@ package closure.space.collabtodo.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,9 +15,12 @@ import android.widget.TextView;
 
 import junit.framework.TestSuite;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import closure.space.collabtodo.database.TodoListDao;
+import closure.space.collabtodo.dialog.EntryMenuDialog;
+import closure.space.collabtodo.dialog.ListCreateDialog;
 import closure.space.collabtodo.main.Interfaces;
 import closure.space.collabtodo.models.TodoList;
 import closure.space.collabtodo.testsuite.TodoListTest;
@@ -28,12 +32,12 @@ import space.closure.collaborativetodo.R;
  * <p/>
  * Created by praveen on 8/5/15.
  */
-public class TodoListsFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class TodoListsFragment extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener, DialogInterface.OnDismissListener {
 
     Context context;
     Interfaces.EntryUpdater mEntryUpdater;
 
-    List<TodoList> mTodoLists;
+    List<TodoList> mTodoLists = new ArrayList<TodoList>();
     TodoListsListAdapter mTodoListsAdapter;
 
     @Override
@@ -49,19 +53,23 @@ public class TodoListsFragment extends Fragment implements AdapterView.OnItemCli
         View rootView = inflater.inflate(R.layout.fragment_todolists, container,
                 false);
 
-        // List all TodoLists
-        mTodoLists = TodoListTest.getDataPoints(10);
-
-        // Update entries from the first TodoList
-        mEntryUpdater.updateEntryList(
-                mTodoLists.get(0).getEntries(),
-                mTodoLists.get(0).getListname());
-
         // Initialize list and adapter
         ListView mTodoListView = (ListView) rootView.findViewById(R.id.todolists_list);
         mTodoListsAdapter = new TodoListsListAdapter(context);
         mTodoListView.setAdapter(mTodoListsAdapter);
         mTodoListView.setOnItemClickListener(this);
+
+        // List all TodoLists
+        updateTodoList();
+
+        // Update entries from the first TodoList
+        if (mTodoLists != null && mTodoLists.size() != 0)
+            mEntryUpdater.updateEntryList(
+                    mTodoLists.get(0).getListid(),
+                    mTodoLists.get(0).getListname());
+
+        // Setup add button
+        rootView.findViewById(R.id.todolists_add).setOnClickListener(this);
 
         return rootView;
     }
@@ -71,8 +79,9 @@ public class TodoListsFragment extends Fragment implements AdapterView.OnItemCli
      */
     public void updateTodoList() {
         // List all TodoLists
-        mTodoLists = TodoListTest.getDataPoints(10);
-        mTodoListsAdapter.notifyDataSetChanged();
+        mTodoLists = TodoListDao.list();
+        if (mTodoListsAdapter != null)
+            mTodoListsAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -87,8 +96,26 @@ public class TodoListsFragment extends Fragment implements AdapterView.OnItemCli
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         mEntryUpdater.updateEntryList(
-                mTodoLists.get(position).getEntries(),
+                mTodoLists.get(position).getListid(),
                 mTodoLists.get(position).getListname());
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.todolists_add:
+                ListCreateDialog lcd = new ListCreateDialog(context);
+                lcd.setOnDismissListener(this);
+                lcd.show();
+                break;
+        }
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        updateTodoList();
     }
 
     /**

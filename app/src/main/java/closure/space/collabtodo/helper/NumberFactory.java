@@ -58,4 +58,11 @@ public class NumberFactory {
         return ApplicationClass.getUUID();
     }
 
+    /**
+     * Returns a globally unique id. Unique across any device in the network
+     */
+    public static String uniqueGlobal() {
+        return uniqueDeviceId() + "-" + uniqueLocal();
+    }
+
 }

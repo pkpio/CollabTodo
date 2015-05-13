@@ -1,5 +1,6 @@
 package closure.space.collabtodo.helper;
 
+import closure.space.collabtodo.database.EntryDao;
 import closure.space.collabtodo.database.TodoListDao;
 import closure.space.collabtodo.helper.NumberFactory;
 import closure.space.collabtodo.models.Entry;
@@ -23,24 +24,17 @@ public class Procedures {
         /**
          * Creates a list from it's name and notifies all nodes in network
          *
-         * @param listName
+         * @param list List object to create in database
          * @return Newly created TodoList object
          */
-        public static TodoList createList(String listName) {
-
-            // Create a new TodoList locally
-            TodoList nTodoList = new TodoList();
-            nTodoList.setListname(listName);
-            // -TODO- id should be prepended by userid
-            nTodoList.setListid(String.valueOf(NumberFactory.uniqueLocal()));
-
+        public static TodoList createList(TodoList list) {
             // Save it locally
-            TodoListDao.save(nTodoList);
+            TodoListDao.save(list);
 
             // Transfer this asynchronously into network
             // -TODO- Implement this
 
-            return nTodoList;
+            return list;
         }
 
         /**
@@ -49,7 +43,11 @@ public class Procedures {
          * @param listid id of the TodoList to be deleted
          */
         public static void deleteList(String listid) {
-            // -TODO- Implement
+            // Delete it locally
+            TodoListDao.delete(listid);
+
+            // Transfer this asynchronously into network
+            // -TODO- Implement this
         }
 
         /**
@@ -58,8 +56,12 @@ public class Procedures {
          * @return Created / Updated Entry
          */
         public static Entry updateEntry(Entry entry) {
-            // -TODO- Implement completely
-            entry.save();
+            // Save it locally
+            EntryDao.save(entry);
+
+            // Transfer this asynchronously into network
+            // -TODO- Implement this
+
             return entry;
         }
 
@@ -69,7 +71,11 @@ public class Procedures {
          * @param entryid entryid of the entry to be deleted
          */
         public static void deleteEntry(String entryid) {
-            // -TODO- Implement
+            // Delete it locally
+            EntryDao.delete(entryid);
+
+            // Transfer this asynchronously into network
+            // -TODO- Implement this
         }
     }
 

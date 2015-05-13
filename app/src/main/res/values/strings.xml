@@ -13,6 +13,11 @@
     <string name="todolist_sample_name">Project X</string>
     <string name="todolist_sample_count">10</string>
     <string name="todolist_add">Add List</string>
+    <string name="todolist_new_name_label">List name</string>
+    <string name="todolist_new_name_helper">Min. %d chars long</string>
+    <string name="todolist_new_name_error">check!</string>
+    <string name="todolist_new_name_sample">House hold</string>
+    <string name="todolist_new_save">save</string>
 
     <!-- Entries fragment strings -->
     <string name="entry_sample_name">Deploy more servers</string>

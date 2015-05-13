@@ -27,6 +27,8 @@ public class TodoListDao {
         list.save();
 
         // Set listids for each entry
+        if (list.getEntries() == null)
+            return;
         for (Entry entry : list.getEntries()) {
             entry.setListid(list.getListid());
             EntryDao.save(entry);

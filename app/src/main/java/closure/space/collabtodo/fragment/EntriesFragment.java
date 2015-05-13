@@ -2,6 +2,7 @@ package closure.space.collabtodo.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,12 +13,14 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import closure.space.collabtodo.database.EntryDao;
 import closure.space.collabtodo.database.TodoListDao;
 import closure.space.collabtodo.dialog.EntryCreateDialog;
 import closure.space.collabtodo.dialog.EntryMenuDialog;
+import closure.space.collabtodo.main.Interfaces;
 import closure.space.collabtodo.models.Entry;
 import closure.space.collabtodo.models.EntryPriority;
 import closure.space.collabtodo.models.TodoList;
@@ -31,17 +34,20 @@ import space.closure.collaborativetodo.R;
  * <p/>
  * Created by praveen on 8/5/15.
  */
-public class EntriesFragment extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class EntriesFragment extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener, DialogInterface.OnDismissListener {
 
     Context context;
+    Interfaces.TodoListUpdater mTodoListUpdater;
+
     String mListid;
-    List<Entry> mEntries;
+    List<Entry> mEntries = new ArrayList<Entry>();
     EntryListAdapter mEntryListAdapter;
 
     @Override
     public void onAttach(Activity a) {
         super.onAttach(a);
         this.context = getActivity();
+        this.mTodoListUpdater = (Interfaces.TodoListUpdater) a;
     }
 
     @Override
@@ -50,14 +56,14 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
         View rootView = inflater.inflate(R.layout.fragment_entries, container,
                 false);
 
-        // List all Entries in a TodoList
-        updateEntryList(mListid);
-
         // Initialize list and adapter
         ListView mEntryListView = (ListView) rootView.findViewById(R.id.entries_list);
         mEntryListAdapter = new EntryListAdapter(context);
         mEntryListView.setAdapter(mEntryListAdapter);
         mEntryListView.setOnItemClickListener(this);
+
+        // List all Entries in a TodoList
+        updateEntryList(mListid);
 
         // Setup add button
         rootView.findViewById(R.id.entry_add_btn).setOnClickListener(this);
@@ -70,10 +76,7 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
         this.mListid = listid;
 
         // Set entries to be listed
-        if (mListid == null)
-            // Sample data for now
-            mEntries = EntryTest.getDataPoints(20);
-        else
+        if (mListid != null)
             mEntries = EntryDao.getEntries(listid);
 
         // Sort them by priority
@@ -95,11 +98,20 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.entry_add_btn:
-                EntryCreateDialog ecd = new EntryCreateDialog(context, mListid);
-                ecd.show();
+                if (mListid != null) {
+                    EntryCreateDialog ecd = new EntryCreateDialog(context, mListid);
+                    ecd.show();
+                    ecd.setOnDismissListener(this);
+                }
                 break;
         }
 
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        updateEntryList(this.mListid);
+        mTodoListUpdater.updateTodoList(); // Updates counts
     }
 
 

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.rey.material.widget.EditText;
 
+import closure.space.collabtodo.helper.NumberFactory;
 import closure.space.collabtodo.helper.Procedures;
 import closure.space.collabtodo.models.Entry;
 import closure.space.collabtodo.params.Local;
@@ -71,12 +72,14 @@ public class EntryCreateDialog extends Dialog implements View.OnClickListener {
                     break;
                 }
 
-                Entry nEntry = new Entry();
-                nEntry.setEntryName(entryName);
-                nEntry.setListid(this.listid);
-                nEntry.setPriorities(null); // -TODO- Priority value implementation : needs userid
-
+                // Create a new entry
+                Entry nEntry = new Entry(
+                        NumberFactory.uniqueGlobal(),
+                        entryName,
+                        listid);
+                nEntry.updatePriority(NumberFactory.uniqueDeviceId(), priority);
                 Procedures.Local.updateEntry(nEntry);
+
                 dismiss();
                 break;
         }

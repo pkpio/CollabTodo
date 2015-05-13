@@ -22,8 +22,16 @@ public class EntryDao {
      * @param entry
      */
     public static void save(Entry entry) {
+
+        // Check if it's database already
+        Entry dbEntry = EntryDao.getEntry(entry.getEntryid());
+
+        // Update if exists
+        if (dbEntry != null)
+            entry.setId(dbEntry.getId()); // These are sugar id
         entry.save();
 
+        // Save each priority
         if (entry.getPriorities() == null || entry.getPriorities().size() == 0)
             return;
         for (EntryPriority ep : entry.getPriorities()) {
