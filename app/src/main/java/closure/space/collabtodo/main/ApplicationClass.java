@@ -30,9 +30,9 @@ public class ApplicationClass extends SugarApp {
     Discovery mDiscovery;
     WifiManager.MulticastLock mMulticastLock;
 
-    Node mNode;
-    Publisher mPublisher;
-    Subscriber mSubscriber;
+    static Node mNode;
+    static Publisher mPublisher;
+    static Subscriber mSubscriber;
 
     // Prefix unique id that any class my use
     static String mUUID;
@@ -136,6 +136,15 @@ public class ApplicationClass extends SugarApp {
 
             }
         }
+    }
+
+    /**
+     * Send data to other devices in the network
+     *
+     * @param msg Message to be sent
+     */
+    public static void send(Message msg) {
+        mPublisher.send(msg);
     }
 
     /**

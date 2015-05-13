@@ -1,10 +1,14 @@
 package closure.space.collabtodo.helper;
 
+import org.umundo.core.Message;
+
 import closure.space.collabtodo.database.EntryDao;
 import closure.space.collabtodo.database.TodoListDao;
 import closure.space.collabtodo.helper.NumberFactory;
+import closure.space.collabtodo.main.ApplicationClass;
 import closure.space.collabtodo.models.Entry;
 import closure.space.collabtodo.models.TodoList;
+import closure.space.collabtodo.params.Global;
 
 /**
  * These are exhaustive list of procedures that are supported
@@ -32,7 +36,10 @@ public class Procedures {
             TodoListDao.save(list);
 
             // Transfer this asynchronously into network
-            // -TODO- Implement this
+            Message msg = new Message();
+            msg.putMeta(Global.UMESSAGE_KEY_METHOD, String.valueOf(Global.METHOD_CREATE_LIST));
+            msg.setData(JsonFactory.toJson(list).getBytes());
+            ApplicationClass.send(msg);
 
             return list;
         }
@@ -47,7 +54,10 @@ public class Procedures {
             TodoListDao.delete(listid);
 
             // Transfer this asynchronously into network
-            // -TODO- Implement this
+            Message msg = new Message();
+            msg.putMeta(Global.UMESSAGE_KEY_METHOD, String.valueOf(Global.METHOD_DELETE_LIST));
+            msg.putMeta(Global.UMESSAGE_KEY_ID, listid);
+            ApplicationClass.send(msg);
         }
 
         /**
@@ -60,7 +70,10 @@ public class Procedures {
             EntryDao.save(entry);
 
             // Transfer this asynchronously into network
-            // -TODO- Implement this
+            Message msg = new Message();
+            msg.putMeta(Global.UMESSAGE_KEY_METHOD, String.valueOf(Global.METHOD_UPDATE_ENTRY));
+            msg.setData(JsonFactory.toJson(entry).getBytes());
+            ApplicationClass.send(msg);
 
             return entry;
         }
@@ -75,7 +88,10 @@ public class Procedures {
             EntryDao.delete(entryid);
 
             // Transfer this asynchronously into network
-            // -TODO- Implement this
+            Message msg = new Message();
+            msg.putMeta(Global.UMESSAGE_KEY_METHOD, String.valueOf(Global.METHOD_DELETE_ENTRY));
+            msg.putMeta(Global.UMESSAGE_KEY_ID, entryid);
+            ApplicationClass.send(msg);
         }
     }
 
@@ -92,7 +108,10 @@ public class Procedures {
          * @param list TodoList object to be created
          */
         public static void createList(TodoList list) {
-            // -TODO- Implement
+            // Save it locally
+            TodoListDao.save(list);
+
+            // -TODO- Trigger UI refresh
         }
 
         /**
@@ -101,7 +120,10 @@ public class Procedures {
          * @param listid id of the TodoList to be deleted
          */
         public static void deleteList(String listid) {
-            // -TODO- Implement
+            // Delete it locally
+            TodoListDao.delete(listid);
+
+            // -TODO- Trigger UI refresh
         }
 
         /**
@@ -110,7 +132,10 @@ public class Procedures {
          * @param entry Entry object to be created or updated
          */
         public static void updateEntry(Entry entry) {
-            // -TODO- Implement
+            // Save it locally
+            EntryDao.save(entry);
+
+            // -TODO- Trigger UI refresh
         }
 
         /**
@@ -119,7 +144,10 @@ public class Procedures {
          * @param entryid id of the Entry to be deleted
          */
         public static void deleteEntry(String entryid) {
-            // -TODO- Implement
+            // Delete it locally
+            EntryDao.delete(entryid);
+
+            // -TODO- Trigger UI refresh
         }
     }
 }
