@@ -2,6 +2,8 @@ package closure.space.collabtodo.helper;
 
 import java.util.Random;
 
+import closure.space.collabtodo.main.ApplicationClass;
+
 /**
  * To get numbers that satisfy a particular criteria
  * <p/>
@@ -46,6 +48,14 @@ public class NumberFactory {
      */
     public static long uniqueLocal() {
         return System.currentTimeMillis();
+    }
+
+    /**
+     * Returns a unique string that is specific to this device. This will remain unchanged in any
+     * future calls
+     */
+    public static String uniqueDeviceId() {
+        return ApplicationClass.getUUID();
     }
 
 }

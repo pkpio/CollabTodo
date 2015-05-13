@@ -14,6 +14,7 @@ import org.umundo.core.Publisher;
 import org.umundo.core.Receiver;
 import org.umundo.core.Subscriber;
 
+import closure.space.collabtodo.helper.DeviceUuidFactory;
 import closure.space.collabtodo.helper.JsonFactory;
 import closure.space.collabtodo.helper.Procedures;
 import closure.space.collabtodo.models.Entry;
@@ -32,6 +33,9 @@ public class ApplicationClass extends SugarApp {
     Node mNode;
     Publisher mPublisher;
     Subscriber mSubscriber;
+
+    // Prefix unique id that any class my use
+    static String mUUID;
 
     Thread testPublishing;
 
@@ -54,6 +58,10 @@ public class ApplicationClass extends SugarApp {
      * unless you know what you are doing.
      */
     public void initUmundo() {
+
+        // Set the unique device id
+        DeviceUuidFactory mDUF = new DeviceUuidFactory(this);
+        this.mUUID = mDUF.getDeviceUuid().toString();
 
         // Get a lock on WifiMulticast
         WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
@@ -136,6 +144,13 @@ public class ApplicationClass extends SugarApp {
      */
     public void releaseMulticastLock() {
         mMulticastLock.release();
+    }
+
+    /**
+     * Unique id for this device
+     */
+    public static String getUUID() {
+        return mUUID;
     }
 
     public class TestPublishing implements Runnable {
