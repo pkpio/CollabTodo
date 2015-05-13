@@ -22,6 +22,19 @@ public class TodoList extends SugarRecord<TodoList> {
     // @SerializedName("entries")
     List<Entry> entries;
 
+    public TodoList() {
+
+    }
+
+    /**
+     * @param listid
+     * @param listname
+     */
+    public TodoList(String listid, String listname) {
+        this.listid = listid;
+        this.listname = listname;
+    }
+
     /**
      * Get global unique id of this list
      *
@@ -77,4 +90,5 @@ public class TodoList extends SugarRecord<TodoList> {
     public void setEntries(List<Entry> entries) {
         this.entries = entries;
     }
+
 }

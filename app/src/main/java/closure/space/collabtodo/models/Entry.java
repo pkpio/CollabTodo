@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
 import com.orm.dsl.Ignore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +20,23 @@ public class Entry extends SugarRecord<Entry> {
 
     @SerializedName("todolistid")
     String listid;
+
+    public Entry() {
+
+    }
+
+    /**
+     * New entry
+     *
+     * @param entryid
+     * @param entryName
+     * @param listid
+     */
+    public Entry(String entryid, String entryName, String listid) {
+        this.entryid = entryid;
+        this.entryName = entryName;
+        this.listid = listid;
+    }
 
     /**
      * Sugar doesn't support saving of Lists into database. So, we add it to ignore
@@ -99,5 +117,43 @@ public class Entry extends SugarRecord<Entry> {
      */
     public void setListid(String listid) {
         this.listid = listid;
+    }
+
+    /**
+     * Updates the priority given by a user for this entry
+     *
+     * @param priority Priority value
+     * @param userId   Userid of the user - this is currently the unique device id
+     */
+    public void updatePriority(int priority, String userId) {
+        if (priorities == null)
+            priorities = new ArrayList<EntryPriority>();
+
+        // We need search if this user has already added  a priority entry and if so, update it
+        Boolean found = false;
+        for (EntryPriority mEP : priorities)
+            if (mEP.getUserid().contentEquals(userId)) {
+                mEP.setPriority(priority);
+                found = true;
+            }
+
+        // Not in list? Add an entryPrio for this user
+        if (!found) priorities.add(new EntryPriority(userId, priority, entryid));
+    }
+
+    /**
+     * Average of all user priorities for this entry
+     *
+     * @return mean of all priorities
+     */
+    public int getMeanPriority() {
+        if (priorities == null || priorities.size() == 0)
+            return 0;
+
+        int total = 0;
+        for (int i = 0; i < priorities.size(); i++)
+            total += priorities.get(i).getPriority();
+
+        return total / priorities.size();
     }
 }

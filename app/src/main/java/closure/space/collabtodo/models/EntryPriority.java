@@ -18,6 +18,16 @@ public class EntryPriority extends SugarRecord<EntryPriority> {
     @SerializedName("entryid")
     String entryid;
 
+    public EntryPriority() {
+
+    }
+
+    public EntryPriority(String userid, int priority, String entryid) {
+        this.userid = userid;
+        this.priority = priority;
+        this.entryid = entryid;
+    }
+
     /**
      * Get user id
      *
