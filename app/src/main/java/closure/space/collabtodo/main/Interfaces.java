@@ -38,6 +38,18 @@ public class Interfaces {
     }
 
     /**
+     * A handler to update the current UI
+     */
+    public interface UIUpdater {
+
+        /**
+         * Update the current UI
+         */
+        public void updateUI();
+
+    }
+
+    /**
      * An interface to update the state of left navigation drawer
      */
     public interface DrawerStateUpdater {

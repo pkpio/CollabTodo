@@ -88,10 +88,6 @@ public class ApplicationClass extends SugarApp {
         // Add pubs and subs on node
         mNode.addPublisher(mPublisher);
         mNode.addSubscriber(mSubscriber);
-
-        // Testing
-        testPublishing = new Thread(new TestPublishing());
-        testPublishing.start();
     }
 
     /**
@@ -133,7 +129,6 @@ public class ApplicationClass extends SugarApp {
                 case Global.METHOD_DELETE_ENTRY:
                     Procedures.Remote.deleteEntry(msg.getMeta(Global.UMESSAGE_KEY_ID));
                     break;
-
             }
         }
     }
@@ -161,25 +156,5 @@ public class ApplicationClass extends SugarApp {
     public static String getUUID() {
         return mUUID;
     }
-
-    public class TestPublishing implements Runnable {
-
-        @Override
-        public void run() {
-
-            while (testPublishing != null) {
-                // Generate a random entry
-                Entry entry = EntryTest.getDataPoint();
-
-                mPublisher.send(JsonFactory.toJson(entry).getBytes());
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
 
 }

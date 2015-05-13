@@ -6,6 +6,7 @@ import closure.space.collabtodo.database.EntryDao;
 import closure.space.collabtodo.database.TodoListDao;
 import closure.space.collabtodo.helper.NumberFactory;
 import closure.space.collabtodo.main.ApplicationClass;
+import closure.space.collabtodo.main.MainActivity;
 import closure.space.collabtodo.models.Entry;
 import closure.space.collabtodo.models.TodoList;
 import closure.space.collabtodo.params.Global;
@@ -110,8 +111,7 @@ public class Procedures {
         public static void createList(TodoList list) {
             // Save it locally
             TodoListDao.save(list);
-
-            // -TODO- Trigger UI refresh
+            updateUI();
         }
 
         /**
@@ -122,8 +122,7 @@ public class Procedures {
         public static void deleteList(String listid) {
             // Delete it locally
             TodoListDao.delete(listid);
-
-            // -TODO- Trigger UI refresh
+            updateUI();
         }
 
         /**
@@ -134,8 +133,7 @@ public class Procedures {
         public static void updateEntry(Entry entry) {
             // Save it locally
             EntryDao.save(entry);
-
-            // -TODO- Trigger UI refresh
+            updateUI();
         }
 
         /**
@@ -146,8 +144,12 @@ public class Procedures {
         public static void deleteEntry(String entryid) {
             // Delete it locally
             EntryDao.delete(entryid);
+            updateUI();
+        }
 
-            // -TODO- Trigger UI refresh
+        public static void updateUI() {
+            if (MainActivity.UIUpdater != null)
+                MainActivity.UIUpdater.updateUI();
         }
     }
 }
