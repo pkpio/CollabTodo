@@ -6,9 +6,23 @@
 
     <!-- Main content -->
     <RelativeLayout
-        android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></RelativeLayout>
+        android:layout_height="match_parent">
+
+        <!-- Content fragment goes here -->
+        <RelativeLayout
+            android:id="@+id/main_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></RelativeLayout>
+
+        <com.rey.material.widget.SnackBar
+            android:id="@+id/main_snackbar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
 
     <!-- Left Navigation -->

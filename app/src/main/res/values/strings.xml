@@ -9,6 +9,7 @@
     <string name="action_cancel">Cancel</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="umsg_no_list_picked">Please pick a list first!</string>
 
     <!-- Main activity strings -->
 
@@ -21,6 +22,7 @@
     <string name="todolist_new_name_error">check!</string>
     <string name="todolist_new_name_sample">House hold</string>
     <string name="todolist_new_save">save</string>
+    <string name="todolist_empty">No lists here</string>
 
     <!-- Entries fragment strings -->
     <string name="entry_sample_name">Deploy more servers</string>
@@ -37,6 +39,7 @@
     <string name="entry_new_name_error">check!</string>
     <string name="entry_new_name_sample">Buy books</string>
     <string name="entry_new_save">save</string>
+    <string name="entry_empty">No entries here</string>
 
 
 </resources>

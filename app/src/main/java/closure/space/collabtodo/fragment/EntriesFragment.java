@@ -13,6 +13,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.rey.material.widget.SnackBar;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,6 +24,7 @@ import closure.space.collabtodo.database.EntryDao;
 import closure.space.collabtodo.dialog.EntryCreateDialog;
 import closure.space.collabtodo.dialog.EntryMenuDialog;
 import closure.space.collabtodo.main.Interfaces;
+import closure.space.collabtodo.main.MainActivity;
 import closure.space.collabtodo.models.Entry;
 import space.closure.collaborativetodo.R;
 
@@ -40,6 +43,7 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
     String mListid;
     List<Entry> mEntries = new ArrayList<Entry>();
     EntryListAdapter mEntryListAdapter;
+    View entryEmtpyWidget;
 
     @Override
     public void onAttach(Activity a) {
@@ -56,6 +60,7 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
 
         // Initialize list and adapter
         ListView mEntryListView = (ListView) rootView.findViewById(R.id.entries_list);
+        entryEmtpyWidget = (View) rootView.findViewById(R.id.entries_empty);
         mEntryListAdapter = new EntryListAdapter(context);
         mEntryListView.setAdapter(mEntryListAdapter);
         mEntryListView.setOnItemClickListener(this);
@@ -107,6 +112,11 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
                     EntryCreateDialog ecd = new EntryCreateDialog(context, mListid);
                     ecd.setOnDismissListener(this);
                     ecd.show();
+                } else {
+                    SnackBar snackBar = ((MainActivity) getActivity()).getSnackBar();
+                    snackBar.applyStyle(R.style.SnackBarSingleLine)
+                            .text(getString(R.string.umsg_no_list_picked))
+                            .show();
                 }
                 break;
         }
@@ -130,6 +140,10 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
 
         public EntryListAdapter(Context context) {
             this.context = context;
+            if (mEntries == null || mEntries.size() == 0)
+                entryEmtpyWidget.setVisibility(View.VISIBLE);
+            else
+                entryEmtpyWidget.setVisibility(View.GONE);
         }
 
         @Override
@@ -211,6 +225,15 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
         @Override
         public long getItemId(int position) {
             return position;
+        }
+
+        @Override
+        public void notifyDataSetChanged() {
+            if (mEntries == null || mEntries.size() == 0)
+                entryEmtpyWidget.setVisibility(View.VISIBLE);
+            else
+                entryEmtpyWidget.setVisibility(View.GONE);
+            super.notifyDataSetChanged();
         }
     }
 

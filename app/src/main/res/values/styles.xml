@@ -46,4 +46,12 @@
         <item name="rd_rippleColor">#33219AFF</item>
     </style>
 
+    <style name="SnackBarSingleLine" parent="Material.Widget.SnackBar.Mobile">
+        <item name="sb_text">Application warning!</item>
+        <item name="sb_actionText">OKAY</item>
+        <item name="sb_duration">5000</item>
+        <item name="sb_width">match_parent</item>
+        <item name="sb_actionTextColor">#03A9F4</item>
+    </style>
+
 </resources>

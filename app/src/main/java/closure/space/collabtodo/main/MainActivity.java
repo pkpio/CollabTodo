@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.rey.material.widget.SnackBar;
+
 import java.util.List;
 
 import closure.space.collabtodo.dialog.ListDeleteDialog;
@@ -24,6 +26,9 @@ public class MainActivity extends BaseNavigationActivity implements Interfaces.E
     String listid;
     String listname;
 
+    // Widgets
+    SnackBar mSnackbar;
+
     // This acts like a handle for UI updates from other places
     public static Interfaces.UIUpdater UIUpdater;
 
@@ -31,6 +36,9 @@ public class MainActivity extends BaseNavigationActivity implements Interfaces.E
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Init widgets
+        mSnackbar = (SnackBar) findViewById(R.id.main_snackbar);
 
         // Get fresh fragment instances
         entriesFragment = new EntriesFragment();
@@ -79,10 +87,10 @@ public class MainActivity extends BaseNavigationActivity implements Interfaces.E
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete:
-                if(listid==null){
+                if (listid == null) {
                     return true;
                 }
-                ListDeleteDialog lcd = new ListDeleteDialog(MainActivity.this,listid);
+                ListDeleteDialog lcd = new ListDeleteDialog(MainActivity.this, listid);
                 lcd.setOnDismissListener(this);
                 lcd.show();
                 return true;
@@ -94,5 +102,9 @@ public class MainActivity extends BaseNavigationActivity implements Interfaces.E
     @Override
     public void onDismiss(DialogInterface dialog) {
         //nothing happens
+    }
+
+    public SnackBar getSnackBar() {
+        return this.mSnackbar;
     }
 }

@@ -39,6 +39,7 @@ public class TodoListsFragment extends Fragment implements AdapterView.OnItemCli
 
     List<TodoList> mTodoLists = new ArrayList<TodoList>();
     TodoListsListAdapter mTodoListsAdapter;
+    View listEmtpyWidget;
 
     @Override
     public void onAttach(Activity a) {
@@ -55,6 +56,7 @@ public class TodoListsFragment extends Fragment implements AdapterView.OnItemCli
 
         // Initialize list and adapter
         ListView mTodoListView = (ListView) rootView.findViewById(R.id.todolists_list);
+        listEmtpyWidget = (View) rootView.findViewById(R.id.list_empty);
         mTodoListsAdapter = new TodoListsListAdapter(context);
         mTodoListView.setAdapter(mTodoListsAdapter);
         mTodoListView.setOnItemClickListener(this);
@@ -128,6 +130,10 @@ public class TodoListsFragment extends Fragment implements AdapterView.OnItemCli
 
         public TodoListsListAdapter(Context context) {
             this.context = context;
+            if (mTodoLists == null || mTodoLists.size() == 0)
+                listEmtpyWidget.setVisibility(View.VISIBLE);
+            else
+                listEmtpyWidget.setVisibility(View.GONE);
         }
 
         @Override
@@ -180,6 +186,15 @@ public class TodoListsFragment extends Fragment implements AdapterView.OnItemCli
         @Override
         public long getItemId(int position) {
             return position;
+        }
+
+        @Override
+        public void notifyDataSetChanged() {
+            if (mTodoLists == null || mTodoLists.size() == 0)
+                listEmtpyWidget.setVisibility(View.VISIBLE);
+            else
+                listEmtpyWidget.setVisibility(View.GONE);
+            super.notifyDataSetChanged();
         }
     }
 

@@ -42,4 +42,13 @@
         android:dividerHeight="0dp"
         android:scrollbars="none"></ListView>
 
+    <!-- Entries empty message -->
+    <TextView
+        android:id="@+id/list_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/todolist_empty"
+        android:textSize="24sp" />
+
 </RelativeLayout>
