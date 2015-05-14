@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -18,6 +19,7 @@ import closure.space.collabtodo.database.EntryDao;
 import closure.space.collabtodo.helper.NumberFactory;
 import closure.space.collabtodo.helper.Procedures;
 import closure.space.collabtodo.main.Interfaces;
+import closure.space.collabtodo.main.MainActivity;
 import closure.space.collabtodo.models.Entry;
 import closure.space.collabtodo.params.Local;
 import space.closure.collaborativetodo.R;
@@ -99,7 +101,7 @@ public class EntryMenuDialog extends Dialog implements View.OnClickListener,
                 dismiss();
                 break;
             case R.id.entry_action_move:
-                // -TODO- Implement moving
+                moveItem();
                 dismiss();
                 break;
             case R.id.entry_action_prio_incr:
@@ -109,6 +111,11 @@ public class EntryMenuDialog extends Dialog implements View.OnClickListener,
                 decreasePriority();
                 break;
         }
+    }
+
+    private void moveItem() {
+        //DialogFragment entryMoveDialog = new EntryMoveDialog();
+        //entryMoveDialog.show(getFragmentManager(), "entryMoveDialog");
     }
 
     public void onDismiss(DialogInterface dialogInterface) {
