@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="16dp"
+    android:orientation="vertical">
+
+    <!--  Event name -->
+    <com.rey.material.widget.TextView
+        android:id="@+id/todolist_delete_sure"
+        style="@style/FlatButtonRippleStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/entry_action_move"
+        android:drawableLeft="@drawable/ic_delete_black_24dp"
+        android:drawablePadding="10dp"
+        android:gravity="left|center_vertical"
+        android:paddingBottom="16dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:text="@string/action_delete_sure"
+        android:textColor="@color/md_black_1000" />
+
+    <com.rey.material.widget.Button
+        android:id="@+id/todolist_cancel_delete"
+        style="@style/FlatButtonRippleStyle"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="8dp"
+        android:text="@string/action_cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/md_grey_900"
+        android:textSize="18sp"
+        app:rd_delayClick="false" />
+
+
+</LinearLayout>

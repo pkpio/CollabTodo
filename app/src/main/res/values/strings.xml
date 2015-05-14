@@ -4,6 +4,9 @@
     <!-- Global strings -->
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_delete_sure">Delete current list</string>
+    <string name="action_cancel">Cancel</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 

@@ -1,17 +1,23 @@
 package closure.space.collabtodo.main;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.List;
 
+import closure.space.collabtodo.dialog.ListDeleteDialog;
 import closure.space.collabtodo.fragment.EntriesFragment;
 import closure.space.collabtodo.fragment.TodoListsFragment;
 import closure.space.collabtodo.models.Entry;
 import space.closure.collaborativetodo.R;
 
 public class MainActivity extends BaseNavigationActivity implements Interfaces.EntryUpdater,
-        Interfaces.TodoListUpdater, Interfaces.UIUpdater {
+        Interfaces.TodoListUpdater, Interfaces.UIUpdater, DialogInterface.OnDismissListener {
+    Context context;
     EntriesFragment entriesFragment;
     TodoListsFragment todoListsFragment;
 
@@ -60,5 +66,33 @@ public class MainActivity extends BaseNavigationActivity implements Interfaces.E
                 updateTodoList();   // Update list
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_delete:
+                if(listid==null){
+                    return true;
+                }
+                ListDeleteDialog lcd = new ListDeleteDialog(MainActivity.this,listid);
+                lcd.setOnDismissListener(this);
+                lcd.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        //nothing happens
     }
 }
