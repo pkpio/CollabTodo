@@ -42,10 +42,13 @@ public class TodoListDao {
      * @param list TodoList
      */
     public static void delete(TodoList list) {
-        TodoList.deleteAll(TodoList.class, "listid = ?", list.getListid());
+        // Delete all entries of a list
+        if (list.getEntries() != null)
+            for (Entry entry : list.getEntries())
+                EntryDao.delete(entry.getEntryid());
 
-        for (Entry entry : list.getEntries())
-            EntryDao.delete(entry.getEntryid());
+        // Delete the list
+        TodoList.deleteAll(TodoList.class, "listid = ?", list.getListid());
     }
 
     /**
