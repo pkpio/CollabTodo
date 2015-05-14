@@ -85,7 +85,7 @@ public class EntryMenuDialog extends Dialog implements View.OnClickListener,
         this.setOnDismissListener(this);
 
         // Init values
-        this.priority = mEntry.getPriority(NumberFactory.uniqueDeviceId());
+        this.priority = mEntry.getEntryPriority();
         entryPrioWidget.setText(String.valueOf(priority));
         entryDoneWidget.setChecked(mEntry.isEntryDone());
     }
@@ -114,7 +114,7 @@ public class EntryMenuDialog extends Dialog implements View.OnClickListener,
     public void onDismiss(DialogInterface dialogInterface) {
         // Because calling on each change is comm. intensive
         if (priorityChanged) {
-            mEntry.updatePriority(NumberFactory.uniqueDeviceId(), priority);
+            mEntry.setEntryPriority(priority);
             Procedures.Local.updateEntry(mEntry);
         }
         dismissListener.onDismiss(dialogInterface);

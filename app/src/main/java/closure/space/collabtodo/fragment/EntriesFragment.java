@@ -17,15 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import closure.space.collabtodo.database.EntryDao;
-import closure.space.collabtodo.database.TodoListDao;
 import closure.space.collabtodo.dialog.EntryCreateDialog;
 import closure.space.collabtodo.dialog.EntryMenuDialog;
 import closure.space.collabtodo.main.Interfaces;
 import closure.space.collabtodo.models.Entry;
-import closure.space.collabtodo.models.EntryPriority;
-import closure.space.collabtodo.models.TodoList;
-import closure.space.collabtodo.testsuite.EntryTest;
-import closure.space.collabtodo.testsuite.TodoListTest;
 import space.closure.collaborativetodo.R;
 
 /**
@@ -165,9 +160,8 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
             viewHolder.entryName.setText(getItem(position).getEntryName());
 
             // Set Avg. value and a proper background
-            int avg = getItem(position).getMeanPriority();
-            viewHolder.entryPrio.setText(String.valueOf(avg));
-            switch (avg) {
+            viewHolder.entryPrio.setText(String.valueOf(getItem(position).getEntryPriority()));
+            switch (getItem(position).getEntryPriority()) {
                 case 5:
                     viewHolder.entryPrio.setBackgroundResource(R.drawable.circle_red);
                     break;

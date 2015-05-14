@@ -45,7 +45,7 @@ public class TodoListDao {
         TodoList.deleteAll(TodoList.class, "listid = ?", list.getListid());
 
         for (Entry entry : list.getEntries())
-            EntryDao.delete(entry);
+            EntryDao.delete(entry.getEntryid());
     }
 
     /**

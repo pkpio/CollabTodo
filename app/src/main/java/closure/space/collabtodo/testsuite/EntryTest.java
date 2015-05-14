@@ -5,7 +5,6 @@ import java.util.List;
 
 import closure.space.collabtodo.helper.NumberFactory;
 import closure.space.collabtodo.models.Entry;
-import closure.space.collabtodo.models.EntryPriority;
 
 /**
  * To get test data for entries
@@ -23,13 +22,7 @@ public class EntryTest {
         Entry e = new Entry();
         e.setEntryid(String.valueOf(NumberFactory.random()));
         e.setEntryName("Test Entry #" + NumberFactory.random(1, 999));
-
-        // Get random EntryPriorities and set eventids for them
-        List<EntryPriority> eps = EntryPriorityTest.getDataPoints(NumberFactory.random(1, 3));
-        for (EntryPriority ep : eps)
-            ep.setEntryid(e.getEntryid());
-
-        e.setPriorities(eps);
+        e.setEntryPriority(NumberFactory.random(1, 5));
         return e;
     }
 

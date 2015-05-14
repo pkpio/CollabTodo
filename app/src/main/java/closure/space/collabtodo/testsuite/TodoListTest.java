@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import closure.space.collabtodo.helper.NumberFactory;
-import closure.space.collabtodo.models.Entry;
-import closure.space.collabtodo.models.EntryPriority;
 import closure.space.collabtodo.models.TodoList;
 
 /**

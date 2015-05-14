@@ -77,7 +77,7 @@ public class EntryCreateDialog extends Dialog implements View.OnClickListener {
                         NumberFactory.uniqueGlobal(),
                         entryName,
                         listid);
-                nEntry.updatePriority(NumberFactory.uniqueDeviceId(), priority);
+                nEntry.setEntryPriority(priority);
                 Procedures.Local.updateEntry(nEntry);
 
                 dismiss();
