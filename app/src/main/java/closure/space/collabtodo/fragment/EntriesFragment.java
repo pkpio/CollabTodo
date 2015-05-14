@@ -170,19 +170,19 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
             // Set Avg. value and a proper background
             viewHolder.entryPrio.setText(String.valueOf(getItem(position).getEntryPriority()));
             switch (getItem(position).getEntryPriority()) {
-                case 5:
+                case 1:
                     viewHolder.entryPrio.setBackgroundResource(R.drawable.circle_red);
                     break;
-                case 4:
+                case 2:
                     viewHolder.entryPrio.setBackgroundResource(R.drawable.circle_orange);
                     break;
                 case 3:
-                    viewHolder.entryPrio.setBackgroundResource(R.drawable.circle_green);
+                    viewHolder.entryPrio.setBackgroundResource(R.drawable.circle_lightorange);
                     break;
-                case 2:
+                case 4:
                     viewHolder.entryPrio.setBackgroundResource(R.drawable.circle_blue);
                     break;
-                case 1:
+                case 5:
                 default:
                     viewHolder.entryPrio.setBackgroundResource(R.drawable.circle_grey);
                     break;

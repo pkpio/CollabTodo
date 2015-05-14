@@ -26,7 +26,7 @@
     <string name="entry_action_undone">Mark incomplete</string>
     <string name="entry_action_delete">Delete</string>
     <string name="entry_action_move">Move to list</string>
-    <string name="entry_action_prio">Priority</string>
+    <string name="entry_action_prio">Priority (1 most urgent)</string>
     <string name="entry_action_prio_incr">+</string>
     <string name="entry_action_prio_decr">-</string>
     <string name="entry_new_name_label">Entry title</string>
