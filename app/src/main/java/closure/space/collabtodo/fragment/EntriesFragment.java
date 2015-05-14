@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import closure.space.collabtodo.database.EntryDao;
@@ -76,7 +78,13 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
             mEntries = EntryDao.getEntries(listid);
 
         // Sort them by priority
-        // -TODO- Implement sorting based on entries average priority here
+        Collections.sort(mEntries, new Comparator<Entry>() {
+            @Override
+            public int compare(Entry entry1, Entry entry2) {
+                Integer prio = entry1.getEntryPriority();
+                return prio.compareTo(entry2.getEntryPriority());
+            }
+        });
 
         if (mEntryListAdapter != null)
             mEntryListAdapter.notifyDataSetChanged();
