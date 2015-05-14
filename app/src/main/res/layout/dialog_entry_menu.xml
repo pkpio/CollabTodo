@@ -35,8 +35,7 @@
         android:paddingRight="16dp"
         android:paddingTop="16dp"
         android:text="@string/entry_action_move"
-        android:textColor="@color/md_black_1000"
-        android:visibility="gone" />
+        android:textColor="@color/md_black_1000" />
 
     <!-- Delete item -->
     <com.rey.material.widget.TextView
