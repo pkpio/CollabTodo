@@ -22,7 +22,7 @@
         android:layout_height="@dimen/listitem_todolist_count_circleradius"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:background="@color/md_orange_400"></View>
+        android:background="@color/md_purple_500"></View>
 
     <!-- Entries count circle -->
     <TextView
@@ -32,7 +32,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="4dp"
-        android:background="@drawable/circle_orange"
+        android:background="@drawable/circle_purple"
         android:gravity="center"
         android:text="@string/todolist_sample_count"
         android:textColor="@color/md_white_1000"
