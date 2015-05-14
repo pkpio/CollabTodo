@@ -1,5 +1,6 @@
 package closure.space.collabtodo.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,6 +19,7 @@ import com.rey.material.widget.EditText;
 import closure.space.collabtodo.database.EntryDao;
 import closure.space.collabtodo.helper.NumberFactory;
 import closure.space.collabtodo.helper.Procedures;
+import closure.space.collabtodo.main.BaseNavigationActivity;
 import closure.space.collabtodo.main.Interfaces;
 import closure.space.collabtodo.main.MainActivity;
 import closure.space.collabtodo.models.Entry;
@@ -30,6 +32,7 @@ import space.closure.collaborativetodo.R;
 public class EntryMenuDialog extends Dialog implements View.OnClickListener,
         CheckBox.OnCheckedChangeListener, Dialog.OnDismissListener {
     Context context;
+    BaseNavigationActivity activity;
     Dialog.OnDismissListener dismissListener;
 
     Entry mEntry;
@@ -53,10 +56,11 @@ public class EntryMenuDialog extends Dialog implements View.OnClickListener,
      *                        setting an onDismissListener from caller.
      * @param listid          current listid being shown
      */
-    public EntryMenuDialog(Context context, Entry entry, int[] location,
+    public EntryMenuDialog(Context context, BaseNavigationActivity activity, Entry entry, int[] location,
                            Dialog.OnDismissListener dismissListener, String listid) {
         super(context);
         this.context = context;
+        this.activity = activity;
         this.mEntry = entry;
         this.location = location;
         this.dismissListener = dismissListener;
@@ -114,8 +118,8 @@ public class EntryMenuDialog extends Dialog implements View.OnClickListener,
     }
 
     private void moveItem() {
-        //DialogFragment entryMoveDialog = new EntryMoveDialog();
-        //entryMoveDialog.show(getFragmentManager(), "entryMoveDialog");
+        DialogFragment entryMoveDialog = new EntryMoveDialog();
+        entryMoveDialog.show(activity.getSupportFragmentManager(), "entryMoveDialog");
     }
 
     public void onDismiss(DialogInterface dialogInterface) {

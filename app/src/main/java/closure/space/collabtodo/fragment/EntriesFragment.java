@@ -23,6 +23,7 @@ import java.util.List;
 import closure.space.collabtodo.database.EntryDao;
 import closure.space.collabtodo.dialog.EntryCreateDialog;
 import closure.space.collabtodo.dialog.EntryMenuDialog;
+import closure.space.collabtodo.main.BaseNavigationActivity;
 import closure.space.collabtodo.main.Interfaces;
 import closure.space.collabtodo.main.MainActivity;
 import closure.space.collabtodo.models.Entry;
@@ -38,6 +39,7 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
         View.OnClickListener, DialogInterface.OnDismissListener {
 
     Context context;
+    BaseNavigationActivity activity;
     Interfaces.TodoListUpdater mTodoListUpdater;
 
     String mListid;
@@ -49,6 +51,7 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
     public void onAttach(Activity a) {
         super.onAttach(a);
         this.context = getActivity();
+        this.activity = (BaseNavigationActivity) a;
         this.mTodoListUpdater = (Interfaces.TodoListUpdater) a;
     }
 
@@ -99,7 +102,7 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         int[] dialogLocation = new int[2];
         view.getLocationOnScreen(dialogLocation);
-        EntryMenuDialog emd = new EntryMenuDialog(context, mEntries.get(position), dialogLocation,
+        EntryMenuDialog emd = new EntryMenuDialog(context, activity, mEntries.get(position), dialogLocation,
                 this, mListid);
         emd.show();
     }
