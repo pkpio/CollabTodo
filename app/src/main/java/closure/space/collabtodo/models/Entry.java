@@ -7,6 +7,8 @@ import com.orm.dsl.Ignore;
 import java.util.ArrayList;
 import java.util.List;
 
+import closure.space.collabtodo.params.Local;
+
 /**
  * Created by praveen on 8/5/15.
  */
@@ -18,11 +20,14 @@ public class Entry extends SugarRecord<Entry> {
     @SerializedName("entryname")
     String entryName;
 
+    @SerializedName("entrydone")
+    Boolean entryDone;
+
     @SerializedName("todolistid")
     String listid;
 
     public Entry() {
-
+        this.entryDone = false;
     }
 
     /**
@@ -35,6 +40,7 @@ public class Entry extends SugarRecord<Entry> {
     public Entry(String entryid, String entryName, String listid) {
         this.entryid = entryid;
         this.entryName = entryName;
+        this.entryDone = false;
         this.listid = listid;
     }
 
@@ -83,6 +89,24 @@ public class Entry extends SugarRecord<Entry> {
     }
 
     /**
+     * Get Entry done status
+     *
+     * @return status
+     */
+    public Boolean isEntryDone() {
+        return entryDone;
+    }
+
+    /**
+     * Set Entry done status
+     *
+     * @param entryDone True => Done
+     */
+    public void setEntryDone(Boolean entryDone) {
+        this.entryDone = entryDone;
+    }
+
+    /**
      * Get list of priorities given to the event
      *
      * @return
@@ -117,6 +141,24 @@ public class Entry extends SugarRecord<Entry> {
      */
     public void setListid(String listid) {
         this.listid = listid;
+    }
+
+    /**
+     * Get the priority set by a particular user
+     *
+     * @param userId User id
+     * @return Priority given by this user
+     */
+    public int getPriority(String userId) {
+        if (priorities == null)
+            return Local.ENTRY_PRIORITY_DEFAULT;
+
+        // We need search if this user has already added  a priority entry and if so, update it
+        int userPrio = Local.ENTRY_PRIORITY_DEFAULT;
+        for (EntryPriority mEP : priorities)
+            if (mEP.getUserid().contentEquals(userId))
+                userPrio = mEP.getPriority();
+        return userPrio;
     }
 
     /**

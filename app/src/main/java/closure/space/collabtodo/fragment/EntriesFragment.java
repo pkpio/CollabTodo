@@ -34,7 +34,8 @@ import space.closure.collaborativetodo.R;
  * <p/>
  * Created by praveen on 8/5/15.
  */
-public class EntriesFragment extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener, DialogInterface.OnDismissListener {
+public class EntriesFragment extends Fragment implements AdapterView.OnItemClickListener,
+        View.OnClickListener, DialogInterface.OnDismissListener {
 
     Context context;
     Interfaces.TodoListUpdater mTodoListUpdater;
@@ -90,7 +91,8 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         int[] dialogLocation = new int[2];
         view.getLocationOnScreen(dialogLocation);
-        EntryMenuDialog emd = new EntryMenuDialog(context, mEntries.get(position), dialogLocation);
+        EntryMenuDialog emd = new EntryMenuDialog(context, mEntries.get(position), dialogLocation,
+                this, mListid);
         emd.show();
     }
 
@@ -100,8 +102,8 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
             case R.id.entry_add_btn:
                 if (mListid != null) {
                     EntryCreateDialog ecd = new EntryCreateDialog(context, mListid);
-                    ecd.show();
                     ecd.setOnDismissListener(this);
+                    ecd.show();
                 }
                 break;
         }
@@ -147,6 +149,8 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
                         .findViewById(R.id.entry_name);
                 viewHolder.entryPrio = (TextView) convertView
                         .findViewById(R.id.entry_prio);
+                viewHolder.entryStrike = (TextView) convertView
+                        .findViewById(R.id.entry_strike);
 
                 // Apply a tag for future references
                 convertView.setTag(viewHolder);
@@ -182,6 +186,13 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
                     break;
             }
 
+            // Entry strike if need be
+            if (getItem(position).isEntryDone())
+                viewHolder.entryStrike.setVisibility(TextView.VISIBLE);
+            else
+                viewHolder.entryStrike.setVisibility(TextView.GONE);
+
+
             return convertView;
         }
 
@@ -204,5 +215,6 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
     static class ViewHolder {
         TextView entryName;
         TextView entryPrio;
+        TextView entryStrike;
     }
 }
