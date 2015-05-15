@@ -35,6 +35,7 @@ public class Procedures {
         public static TodoList createList(TodoList list) {
             // Save it locally
             TodoListDao.save(list);
+            updateUI();
 
             // Transfer this asynchronously into network
             Message msg = new Message();
@@ -53,6 +54,7 @@ public class Procedures {
         public static void deleteList(String listid) {
             // Delete it locally
             TodoListDao.delete(listid);
+            updateUI();
 
             // Transfer this asynchronously into network
             Message msg = new Message();
@@ -69,6 +71,7 @@ public class Procedures {
         public static Entry updateEntry(Entry entry) {
             // Save it locally
             EntryDao.save(entry);
+            updateUI();
 
             // Transfer this asynchronously into network
             Message msg = new Message();
@@ -87,6 +90,7 @@ public class Procedures {
         public static void deleteEntry(String entryid) {
             // Delete it locally
             EntryDao.delete(entryid);
+            updateUI();
 
             // Transfer this asynchronously into network
             Message msg = new Message();
@@ -146,10 +150,10 @@ public class Procedures {
             EntryDao.delete(entryid);
             updateUI();
         }
+    }
 
-        public static void updateUI() {
-            if (MainActivity.UIUpdater != null)
-                MainActivity.UIUpdater.updateUI();
-        }
+    public static void updateUI() {
+        if (MainActivity.UIUpdater != null)
+            MainActivity.UIUpdater.updateUI();
     }
 }

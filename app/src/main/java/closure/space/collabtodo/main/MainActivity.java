@@ -90,7 +90,7 @@ public class MainActivity extends BaseNavigationActivity implements Interfaces.E
                 if (listid == null) {
                     return true;
                 }
-                ListDeleteDialog lcd = new ListDeleteDialog(MainActivity.this, listid);
+                ListDeleteDialog lcd = new ListDeleteDialog(MainActivity.this, listid, this);
                 lcd.setOnDismissListener(this);
                 lcd.show();
                 return true;

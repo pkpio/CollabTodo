@@ -42,6 +42,9 @@ public class TodoListDao {
      * @param list TodoList
      */
     public static void delete(TodoList list) {
+        if (list == null)
+            return;
+
         // Delete all entries of a list
         if (list.getEntries() != null)
             for (Entry entry : list.getEntries())
@@ -57,10 +60,7 @@ public class TodoListDao {
      * @param listid TodoList id
      */
     public static void delete(String listid) {
-        List<TodoList> lists = TodoList.find(TodoList.class, "listid = ?", listid);
-        if (lists == null || lists.size() == 0)
-            return;
-        delete(lists.get(0));
+        delete(getList(listid));
     }
 
     /**
@@ -73,6 +73,14 @@ public class TodoListDao {
         for (TodoList list : mTodoLists)
             list.setEntries(EntryDao.getEntries(list.getListid()));
         return mTodoLists;
+    }
+
+    public static TodoList getList(String listid) {
+        List<TodoList> lists = TodoList.find(TodoList.class, "listid = ?", listid);
+        if (lists == null || lists.size() == 0)
+            return null;
+        lists.get(0).setEntries(EntryDao.getEntries(lists.get(0).getListid()));
+        return lists.get(0);
     }
 
 }

@@ -128,8 +128,8 @@ public class EntriesFragment extends Fragment implements AdapterView.OnItemClick
 
     @Override
     public void onDismiss(DialogInterface dialog) {
-        updateEntryList(this.mListid);
-        mTodoListUpdater.updateTodoList(); // Updates counts
+        //updateEntryList(this.mListid);
+        //mTodoListUpdater.updateTodoList(); // Updates counts
     }
 
 

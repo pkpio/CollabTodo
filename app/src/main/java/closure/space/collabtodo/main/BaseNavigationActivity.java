@@ -87,4 +87,9 @@ public class BaseNavigationActivity extends AppCompatActivity implements Interfa
         else
             mDrawerLayout.closeDrawer(Gravity.LEFT);
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+        getSupportActionBar().setTitle(title);
+    }
 }

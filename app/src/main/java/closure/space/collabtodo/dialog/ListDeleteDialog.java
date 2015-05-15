@@ -1,5 +1,6 @@
 package closure.space.collabtodo.dialog;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -12,19 +13,22 @@ import android.view.Window;
 import com.rey.material.widget.EditText;
 
 import closure.space.collabtodo.helper.Procedures;
+import closure.space.collabtodo.main.MainActivity;
 import space.closure.collaborativetodo.R;
 
 /**
  * Created by Jane Doe on 14.05.2015.
  */
-public class ListDeleteDialog  extends Dialog implements View.OnClickListener {
+public class ListDeleteDialog extends Dialog implements View.OnClickListener {
     Context context;
     String listid;
+    Activity a;
 
-    public ListDeleteDialog(Context context, String listid) {
+    public ListDeleteDialog(Context context, String listid, Activity a) {
         super(context);
         this.context = context;
         this.listid = listid;
+        this.a = a;
     }
 
     @Override
@@ -45,6 +49,8 @@ public class ListDeleteDialog  extends Dialog implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.todolist_delete_sure:
                 Procedures.Local.deleteList(listid);
+                // Remove title
+                ((MainActivity) a).setTitle(context.getString(R.string.pick_list));
                 dismiss();
                 break;
             case R.id.todolist_cancel_delete:
