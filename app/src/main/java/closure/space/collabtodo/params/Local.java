@@ -52,4 +52,14 @@ public class Local {
      * List name Min characters
      */
     public static final int LIST_NAME_MIN_CHARS = 3;
+
+    /**
+     * Tag for showing the EntryMoveDialog
+     */
+    public static final String ENTRY_MOVE_DIALOG = "entryMoveDialog";
+
+    /**
+     * Tag for accessing entryid
+     */
+    public static final String ENTRY_ID = "entryid";
 }

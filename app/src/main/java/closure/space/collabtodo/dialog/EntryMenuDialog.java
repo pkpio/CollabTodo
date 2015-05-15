@@ -1,6 +1,5 @@
 package closure.space.collabtodo.dialog;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,14 +13,9 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.rey.material.widget.CheckBox;
-import com.rey.material.widget.EditText;
 
-import closure.space.collabtodo.database.EntryDao;
-import closure.space.collabtodo.helper.NumberFactory;
 import closure.space.collabtodo.helper.Procedures;
 import closure.space.collabtodo.main.BaseNavigationActivity;
-import closure.space.collabtodo.main.Interfaces;
-import closure.space.collabtodo.main.MainActivity;
 import closure.space.collabtodo.models.Entry;
 import closure.space.collabtodo.params.Local;
 import space.closure.collaborativetodo.R;
@@ -105,7 +99,7 @@ public class EntryMenuDialog extends Dialog implements View.OnClickListener,
                 dismiss();
                 break;
             case R.id.entry_action_move:
-                moveItem();
+                showEntryMoveDialog();
                 dismiss();
                 break;
             case R.id.entry_action_prio_incr:
@@ -117,9 +111,9 @@ public class EntryMenuDialog extends Dialog implements View.OnClickListener,
         }
     }
 
-    private void moveItem() {
-        DialogFragment entryMoveDialog = new EntryMoveDialog();
-        entryMoveDialog.show(activity.getSupportFragmentManager(), "entryMoveDialog");
+    private void showEntryMoveDialog() {
+        DialogFragment entryMoveDialog = EntryMoveDialog.newInstance(mEntry.getEntryid());
+        entryMoveDialog.show(activity.getSupportFragmentManager(), Local.ENTRY_MOVE_DIALOG);
     }
 
     public void onDismiss(DialogInterface dialogInterface) {
