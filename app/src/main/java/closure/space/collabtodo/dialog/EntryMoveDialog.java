@@ -11,6 +11,7 @@ import java.util.List;
 
 import closure.space.collabtodo.database.EntryDao;
 import closure.space.collabtodo.database.TodoListDao;
+import closure.space.collabtodo.helper.Procedures;
 import closure.space.collabtodo.models.Entry;
 import closure.space.collabtodo.models.TodoList;
 import closure.space.collabtodo.params.Local;
@@ -51,7 +52,7 @@ public class EntryMoveDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int selected) {
                         Entry mEntry = EntryDao.getEntry(getArguments().getString(Local.ENTRY_ID));
                         mEntry.setListid(mTodoLists.get(selected).getListid());
-                        mEntry.save();
+                        Procedures.Local.updateEntry(mEntry);
                     }
                 });
 
