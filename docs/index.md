@@ -6,7 +6,7 @@ CollabTodo
 ## 1. Introduction
 
 CollabTodo is simply put a Colloborative Todo application with the added 
-advantage of being fully decentralized and auto syncing to multiple device in background.
+advantage of being fully decentralized and auto syncing to multiple devices in the background.
 
 **Note:** Requires Android 2.3+ and Multicast enabled network
 
@@ -32,16 +32,16 @@ advantage of being fully decentralized and auto syncing to multiple device in ba
 Requirements:
 
   * Install app
-  	Atleast on 2 Android devices
+  	At least on 2 Android devices
   	
   * Connect to Network
-  	Devices should be in same network with multicast support
+  	Devices should be in the same network with multicast support
 
 
 Running:
 
   * Open application
-  	On Both devices. Kill if open before - gives a fresh start
+  	On both devices. Kill if opened before - gives a fresh start
   	
   * Pull navigation
   	A gesture from ```Left-edge to right```
@@ -81,24 +81,24 @@ Running:
 **Note:** All 3 layers are implemented in a total of 8 packages 
 
   * <b>database</b> (Bridge)
-  	Handles all database related operation like ```save```, ```fetch``` and ```delete``` on objects
+  	Handles all database related operations like ```save```, ```fetch``` and ```delete``` on objects
   	
   * <b>dialog</b> (UI)
-  	Contains all the dialogs used in the application
+  	Contains all dialogs used in the application
   	
   * <b>fragment</b> (UI)
-  	Contains all fragment classes used
+  	Contains all fragment classes that are used
   	
   * <b>helper</b> (Bridge)
   	```DeviceUuidFactory``` : Unqiue device id generation
   	```GsonExclude``` : A Gson exclusion strategy to work well with Sugar Database
-  	```JsonFactory``` : Converts Objects - Json strings and viceversa after applying required strategies
-  	```NumberFactory``` : For generating random numbers, strings or hashs fitting some criteria
-  	```Procedures``` : <b>The gluing component of Bridge.</b> Contains ```Local``` and ```Remote``` procedures. More about this below.
+  	```JsonFactory``` : Converts objects to Json strings and vice versa after applying required strategies
+  	```NumberFactory``` : For generating random numbers, strings or hashs fitting certain criteria
+  	```Procedures``` : <b>The glueing component of Bridge.</b> Contains ```Local``` and ```Remote``` procedures. More about this below.
   		
   	
   * <b>main</b> (UI & Network)
-  	```ApplicationClass``` : Network layer. Init backend when application starts and also handles all communication
+  	```ApplicationClass``` : Network layer. Initializes backend when application starts and also handles all communication
   	```Interfaces``` : Bridge layer. Interfaces to communicate between fragments
   	
   * <b>models</b> (Bridge)
@@ -116,7 +116,7 @@ Running:
 Additional info on ```Procedures```
 
   * <b>Local</b> :
-  	Used for actions occured in the current device. Updates action into local database. Notifies all remote devices.
+  	Used for actions occured in the current device. Updates actions into local database. Notifies all remote devices.
   
   * <b>Remote</b> :
   	Used for actions occured on some remote device. Receives changes, updates in local database and triggers UI refresh.
@@ -131,7 +131,7 @@ This is a list of technologies used and the purpose they served
   	Data exchange format in the umundo network
   
   * [Google Gson](https://github.com/google/gson)
-  	Conversion of Objects - Json and viceversa
+  	Conversion of objects to Json and viceversa
   
   * [Sugar ORM](https://github.com/satyan/sugar)
   	Objects database. Translates to RDBMS in the backend
@@ -143,7 +143,7 @@ This is a list of technologies used and the purpose they served
   	Backward compatibility of UI to pre 4.x devices
   	
   * [MaterialLibrary](https://github.com/rey5137/material/)
-  	A library to bring Material Design UI to pre-Lolipop Android
+  	A library to bring material design UI to pre-Lolipop Android
   
   * [Material Design Icons](https://github.com/google/material-design-icons)
   	Well, the gorgeous icons
