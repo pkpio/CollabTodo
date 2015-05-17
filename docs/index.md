@@ -5,8 +5,7 @@ CollabTodo
 
 ## 1. Introduction
 
-CollabTodo is simply put a Colloborative Todo application with the added 
-advantage of being fully decentralized and auto syncing to multiple devices in the background.
+CollabTodo is simply put a Colloborative Todo application with the added advantage of being fully decentralized and auto syncing to multiple devices in the background.
 
 **Note:** Requires Android 2.3+ and Multicast enabled network
 
